@@ -98,6 +98,15 @@
             </article>
             @endforeach
         </div>
+
+        <div class="mt-12 text-center">
+            <a href="{{ route('articles.index') }}" class="group inline-flex items-center gap-2 px-6 py-3 bg-black text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-all duration-300">
+                Lihat Semua Artikel
+                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </div>
     </div>
 </section>
 @endif
