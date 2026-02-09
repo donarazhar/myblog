@@ -58,6 +58,7 @@ class DatabaseSeeder extends Seeder
             SignageDisplayArticleSeeder::class,
             FbEngagementArticleSeeder::class,
             AiPhotoEditingArticleSeeder::class,
+            IttdLearnhubArticleSeeder::class,
         ]);
     }
 }
