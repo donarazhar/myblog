@@ -7,6 +7,9 @@
     <meta name="description" content="@yield('meta_description', 'Company Profile & Portfolio - Pembuatan Aplikasi')">
     <title>@yield('title', 'My Blog') | {{ config('app.name') }}</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,10 +53,10 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <a href="{{ route('home') }}" class="flex items-center space-x-2 group">
-                    <div class="w-10 h-10 bg-black rounded-xl flex items-center justify-center shadow-lg group-hover:bg-gray-800 transition-all duration-300">
-                        <span class="text-white font-bold text-lg">M</span>
+                    <div class="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden shadow-lg group-hover:scale-105 transition-all duration-300">
+                        <img src="{{ asset('img/favicon.png') }}" alt="Logo" class="w-full h-full object-cover">
                     </div>
-                    <span class="text-xl font-bold text-black">MyBlog</span>
+                    <span class="text-xl font-bold text-black">DnrAzhr Blog</span>
                 </a>
 
                 <!-- Desktop Menu -->
@@ -93,7 +96,7 @@
     <footer class="bg-black">
         <div class="content-container px-4 sm:px-6 lg:px-8 py-12">
             <div class="text-center text-gray-400 text-sm">
-                <p>&copy; {{ date('Y') }} MyBlog. All rights reserved.</p>
+                <p>&copy; {{ date('Y') }} DnrAzhr Blog. All rights reserved.</p>
             </div>
         </div>
     </footer>

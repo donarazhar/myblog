@@ -4,23 +4,8 @@
 @section('meta_description', 'Baca artikel-artikel terbaru tentang pembuatan aplikasi')
 
 @section('content')
-<!-- Hero Section -->
-<section class="relative py-20 bg-black overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-        <div class="absolute inset-0 bg-pattern"></div>
-    </div>
-
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
-            @if(isset($category))
-            {{ $category->name }}
-            @else
-            Articles
-            @endif
-        </h1>
-        <p class="text-xl text-gray-400 max-w-2xl mx-auto">Artikel dan tutorial tentang pembuatan aplikasi</p>
-    </div>
-</section>
+<!-- Dark Divider -->
+<div class="h-1 bg-black"></div>
 
 <!-- Articles Content -->
 <section class="py-20 bg-gray-50">

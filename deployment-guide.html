@@ -1,0 +1,943 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Deployment Guide - MyBlog</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --bg-dark: #0a0a0a;
+                --bg-card: #111111;
+                --bg-code: #1a1a1a;
+                --text-primary: #ffffff;
+                --text-secondary: #888888;
+                --accent: #3b82f6;
+                --accent-green: #22c55e;
+                --accent-yellow: #eab308;
+                --accent-red: #ef4444;
+                --border: #222222;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: "Inter", sans-serif;
+                background: var(--bg-dark);
+                color: var(--text-primary);
+                line-height: 1.7;
+            }
+
+            .container {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 60px 20px;
+            }
+
+            /* Header */
+            .header {
+                text-align: center;
+                margin-bottom: 60px;
+            }
+
+            .header-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 16px;
+                background: rgba(59, 130, 246, 0.1);
+                border: 1px solid rgba(59, 130, 246, 0.3);
+                border-radius: 100px;
+                font-size: 13px;
+                color: var(--accent);
+                margin-bottom: 24px;
+            }
+
+            .header h1 {
+                font-size: 48px;
+                font-weight: 700;
+                margin-bottom: 16px;
+                background: linear-gradient(135deg, #fff 0%, #888 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .header p {
+                font-size: 18px;
+                color: var(--text-secondary);
+            }
+
+            /* Table of Contents */
+            .toc {
+                background: var(--bg-card);
+                border: 1px solid var(--border);
+                border-radius: 16px;
+                padding: 24px 32px;
+                margin-bottom: 48px;
+            }
+
+            .toc h2 {
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: var(--text-secondary);
+                margin-bottom: 16px;
+            }
+
+            .toc-list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .toc-list a {
+                color: var(--text-primary);
+                text-decoration: none;
+                font-size: 15px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 8px 12px;
+                border-radius: 8px;
+                transition: all 0.2s;
+            }
+
+            .toc-list a:hover {
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+            .toc-list .step-num {
+                width: 28px;
+                height: 28px;
+                background: var(--bg-code);
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 13px;
+                font-weight: 600;
+                color: var(--accent);
+            }
+
+            /* Section */
+            .section {
+                margin-bottom: 48px;
+            }
+
+            .section-header {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                margin-bottom: 24px;
+                padding-bottom: 16px;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .section-number {
+                width: 48px;
+                height: 48px;
+                background: linear-gradient(135deg, var(--accent), #8b5cf6);
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 20px;
+                font-weight: 700;
+            }
+
+            .section h2 {
+                font-size: 24px;
+                font-weight: 600;
+            }
+
+            .section p {
+                color: var(--text-secondary);
+                margin-bottom: 16px;
+            }
+
+            /* Code Block */
+            .code-block {
+                background: var(--bg-code);
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                margin-bottom: 20px;
+                overflow: hidden;
+            }
+
+            .code-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 12px 16px;
+                background: rgba(255, 255, 255, 0.02);
+                border-bottom: 1px solid var(--border);
+            }
+
+            .code-title {
+                font-size: 13px;
+                color: var(--text-secondary);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .code-title::before {
+                content: "●";
+                color: var(--accent-green);
+            }
+
+            .copy-btn {
+                background: transparent;
+                border: 1px solid var(--border);
+                color: var(--text-secondary);
+                padding: 6px 12px;
+                border-radius: 6px;
+                font-size: 12px;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+
+            .copy-btn:hover {
+                background: var(--bg-card);
+                color: var(--text-primary);
+            }
+
+            .code-content {
+                padding: 16px 20px;
+                overflow-x: auto;
+            }
+
+            .code-content pre {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 14px;
+                line-height: 1.6;
+                color: #e2e8f0;
+            }
+
+            .code-content .comment {
+                color: #6b7280;
+            }
+
+            .code-content .command {
+                color: var(--accent-green);
+            }
+
+            .code-content .string {
+                color: var(--accent-yellow);
+            }
+
+            .code-content .keyword {
+                color: #c084fc;
+            }
+
+            /* Note Box */
+            .note {
+                display: flex;
+                gap: 16px;
+                padding: 16px 20px;
+                background: rgba(59, 130, 246, 0.1);
+                border: 1px solid rgba(59, 130, 246, 0.2);
+                border-radius: 12px;
+                margin-bottom: 20px;
+            }
+
+            .note.warning {
+                background: rgba(234, 179, 8, 0.1);
+                border-color: rgba(234, 179, 8, 0.2);
+            }
+
+            .note-icon {
+                font-size: 20px;
+            }
+
+            .note-content {
+                font-size: 14px;
+                color: var(--text-secondary);
+            }
+
+            .note-content strong {
+                color: var(--text-primary);
+            }
+
+            /* Config Table */
+            .config-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+
+            .config-table th,
+            .config-table td {
+                padding: 12px 16px;
+                text-align: left;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .config-table th {
+                background: var(--bg-code);
+                font-size: 13px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                color: var(--text-secondary);
+            }
+
+            .config-table td {
+                font-size: 14px;
+            }
+
+            .config-table code {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 13px;
+                background: var(--bg-code);
+                padding: 4px 8px;
+                border-radius: 4px;
+                color: var(--accent-yellow);
+            }
+
+            /* Footer */
+            .footer {
+                text-align: center;
+                padding-top: 48px;
+                border-top: 1px solid var(--border);
+                color: var(--text-secondary);
+                font-size: 14px;
+            }
+
+            .footer a {
+                color: var(--accent);
+                text-decoration: none;
+            }
+
+            @media (max-width: 768px) {
+                .header h1 {
+                    font-size: 32px;
+                }
+
+                .toc-list {
+                    grid-template-columns: 1fr;
+                }
+
+                .section-header {
+                    flex-direction: column;
+                    text-align: center;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-badge">
+                    <span>📋</span>
+                    <span>Documentation</span>
+                </div>
+                <h1>MyBlog Deployment Guide</h1>
+                <p>
+                    Panduan lengkap deploy Laravel blog ke Ubuntu Server dengan
+                    Nginx
+                </p>
+            </div>
+
+            <!-- Table of Contents -->
+            <div class="toc">
+                <h2>Daftar Isi</h2>
+                <div class="toc-list">
+                    <a href="#step1"
+                        ><span class="step-num">1</span>Install Dependencies</a
+                    >
+                    <a href="#step2"
+                        ><span class="step-num">2</span>Clone Repository</a
+                    >
+                    <a href="#step3"
+                        ><span class="step-num">3</span>Setup Laravel</a
+                    >
+                    <a href="#step4"
+                        ><span class="step-num">4</span>Setup Database</a
+                    >
+                    <a href="#step5"
+                        ><span class="step-num">5</span>Build Frontend</a
+                    >
+                    <a href="#step6"
+                        ><span class="step-num">6</span>Set Permissions</a
+                    >
+                    <a href="#step7"
+                        ><span class="step-num">7</span>Konfigurasi Nginx</a
+                    >
+                    <a href="#step8"
+                        ><span class="step-num">8</span>Enable & Restart</a
+                    >
+                    <a href="#step9"
+                        ><span class="step-num">9</span>Install Cloudflared</a
+                    >
+                    <a href="#step10"
+                        ><span class="step-num">10</span>Create Tunnel</a
+                    >
+                    <a href="#step11"
+                        ><span class="step-num">11</span>Configure Tunnel</a
+                    >
+                    <a href="#step12"
+                        ><span class="step-num">12</span>Run as Service</a
+                    >
+                </div>
+            </div>
+
+            <!-- Step 1 -->
+            <div class="section" id="step1">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2>Install Dependencies</h2>
+                </div>
+                <p>
+                    Install semua package yang dibutuhkan untuk menjalankan
+                    Laravel.
+                </p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title"
+                            >Update System & Install PHP</span
+                        >
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="comment"># Update system</span>
+<span class="command">apt update && apt upgrade -y</span>
+
+<span class="comment"># Install PHP 8.2+ dan extensions</span>
+<span class="command">apt install -y php php-cli php-fpm php-mysql php-mbstring php-xml php-curl php-zip php-gd unzip git nginx mysql-server</span></pre>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title"
+                            >Install Composer & Node.js</span
+                        >
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="comment"># Install Composer</span>
+<span class="command">curl -sS https://getcomposer.org/installer | php</span>
+<span class="command">mv composer.phar /usr/local/bin/composer</span>
+
+<span class="comment"># Install Node.js 20</span>
+<span class="command">curl -fsSL https://deb.nodesource.com/setup_20.x | bash -</span>
+<span class="command">apt install -y nodejs</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="section" id="step2">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2>Clone Repository</h2>
+                </div>
+                <p>Clone project dari GitHub ke folder /var/www.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">Clone dari GitHub</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="command">cd /var/www</span>
+<span class="command">git clone https://github.com/donarazhar/myblog.git</span>
+<span class="command">cd myblog</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="section" id="step3">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2>Setup Laravel</h2>
+                </div>
+                <p>Install dependencies dan konfigurasi environment.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">Install & Configure</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="comment"># Install dependencies</span>
+<span class="command">composer install --no-dev --optimize-autoloader</span>
+
+<span class="comment"># Copy dan edit .env</span>
+<span class="command">cp .env.example .env</span>
+<span class="command">nano .env</span></pre>
+                    </div>
+                </div>
+
+                <div class="note warning">
+                    <span class="note-icon">⚠️</span>
+                    <div class="note-content">
+                        <strong>Penting!</strong> Edit file .env sesuai
+                        konfigurasi server Anda.
+                    </div>
+                </div>
+
+                <table class="config-table">
+                    <thead>
+                        <tr>
+                            <th>Variable</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>APP_ENV</code></td>
+                            <td>production</td>
+                        </tr>
+                        <tr>
+                            <td><code>APP_DEBUG</code></td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td><code>APP_URL</code></td>
+                            <td>http://192.168.13.77</td>
+                        </tr>
+                        <tr>
+                            <td><code>DB_DATABASE</code></td>
+                            <td>myblog</td>
+                        </tr>
+                        <tr>
+                            <td><code>DB_USERNAME</code></td>
+                            <td>root</td>
+                        </tr>
+                        <tr>
+                            <td><code>DB_PASSWORD</code></td>
+                            <td>your_password</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="section" id="step4">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2>Setup Database</h2>
+                </div>
+                <p>Buat database MySQL dan jalankan migrasi.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">Create Database</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="comment"># Masuk ke MySQL</span>
+<span class="command">mysql -u root -p</span>
+
+<span class="comment"># Buat database</span>
+<span class="keyword">CREATE DATABASE</span> <span class="string">myblog</span>;
+<span class="keyword">exit</span>;</pre>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">Run Migrations</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="comment"># Generate key & migrate</span>
+<span class="command">php artisan key:generate</span>
+<span class="command">php artisan migrate --seed</span>
+<span class="command">php artisan storage:link</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="section" id="step5">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2>Build Frontend</h2>
+                </div>
+                <p>Install npm packages dan build assets untuk production.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">Build Assets</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="command">npm install</span>
+<span class="command">npm run build</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="section" id="step6">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <h2>Set Permissions</h2>
+                </div>
+                <p>Set ownership dan permissions yang benar untuk Laravel.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title"
+                            >Set Ownership & Permissions</span
+                        >
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="command">chown -R www-data:www-data /var/www/myblog</span>
+<span class="command">chmod -R 755 /var/www/myblog/storage</span>
+<span class="command">chmod -R 755 /var/www/myblog/bootstrap/cache</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 7 -->
+            <div class="section" id="step7">
+                <div class="section-header">
+                    <div class="section-number">7</div>
+                    <h2>Konfigurasi Nginx</h2>
+                </div>
+                <p>Buat virtual host Nginx untuk Laravel.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">Buat file konfigurasi</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="command">nano /etc/nginx/sites-available/myblog</span></pre>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">Nginx Configuration</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="keyword">server</span> {
+    <span class="keyword">listen</span> <span class="string">80</span>;
+    <span class="keyword">server_name</span> <span class="string">192.168.13.77</span>;
+    <span class="keyword">root</span> <span class="string">/var/www/myblog/public</span>;
+
+    <span class="keyword">add_header</span> X-Frame-Options <span class="string">"SAMEORIGIN"</span>;
+    <span class="keyword">add_header</span> X-Content-Type-Options <span class="string">"nosniff"</span>;
+
+    <span class="keyword">index</span> index.php;
+    <span class="keyword">charset</span> utf-8;
+
+    <span class="keyword">location</span> / {
+        <span class="keyword">try_files</span> $uri $uri/ /index.php?$query_string;
+    }
+
+    <span class="keyword">location</span> ~ \.php$ {
+        <span class="keyword">fastcgi_pass</span> unix:/var/run/php/php8.2-fpm.sock;
+        <span class="keyword">fastcgi_param</span> SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        <span class="keyword">include</span> fastcgi_params;
+    }
+
+    <span class="keyword">location</span> ~ /\.(?!well-known).* {
+        <span class="keyword">deny</span> all;
+    }
+}</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 8 -->
+            <div class="section" id="step8">
+                <div class="section-header">
+                    <div class="section-number">8</div>
+                    <h2>Enable & Restart</h2>
+                </div>
+                <p>Aktifkan site dan restart Nginx.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">Enable Site & Restart</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="comment"># Enable site</span>
+<span class="command">ln -s /etc/nginx/sites-available/myblog /etc/nginx/sites-enabled/</span>
+
+<span class="comment"># Hapus default site</span>
+<span class="command">rm /etc/nginx/sites-enabled/default</span>
+
+<span class="comment"># Test & restart</span>
+<span class="command">nginx -t</span>
+<span class="command">systemctl restart nginx</span></pre>
+                    </div>
+                </div>
+
+                <div class="note">
+                    <span class="note-icon">✅</span>
+                    <div class="note-content">
+                        <strong>Local Access Ready!</strong> Website dapat
+                        diakses via <code>http://192.168.13.77</code> dalam
+                        jaringan lokal.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cloudflare Tunnel Section Header -->
+            <div class="section" style="margin-top: 60px; margin-bottom: 30px">
+                <div
+                    class="section-header"
+                    style="border-bottom: 2px solid var(--accent)"
+                >
+                    <div
+                        class="section-number"
+                        style="
+                            background: linear-gradient(
+                                135deg,
+                                #f97316,
+                                #ea580c
+                            );
+                        "
+                    >
+                        ☁️
+                    </div>
+                    <h2>Cloudflare Tunnel Setup</h2>
+                </div>
+                <p>
+                    Expose server lokal ke internet dengan domain
+                    <code>donarazhar.site</code> menggunakan Cloudflare Tunnel.
+                </p>
+            </div>
+
+            <!-- Step 9 -->
+            <div class="section" id="step9">
+                <div class="section-header">
+                    <div class="section-number">9</div>
+                    <h2>Install Cloudflared</h2>
+                </div>
+                <p>Download dan install Cloudflared daemon.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">Download & Install</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="comment"># Download cloudflared</span>
+<span class="command">curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb</span>
+
+<span class="comment"># Install</span>
+<span class="command">dpkg -i cloudflared.deb</span>
+
+<span class="comment"># Verify installation</span>
+<span class="command">cloudflared --version</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 10 -->
+            <div class="section" id="step10">
+                <div class="section-header">
+                    <div class="section-number">10</div>
+                    <h2>Create Tunnel</h2>
+                </div>
+                <p>Login ke Cloudflare dan buat tunnel baru.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">Login & Create Tunnel</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="comment"># Login ke Cloudflare (akan membuka URL di browser)</span>
+<span class="command">cloudflared tunnel login</span>
+
+<span class="comment"># Buat tunnel baru</span>
+<span class="command">cloudflared tunnel create myblog</span></pre>
+                    </div>
+                </div>
+
+                <div class="note warning">
+                    <span class="note-icon">📝</span>
+                    <div class="note-content">
+                        <strong>Catat Tunnel ID!</strong> Setelah membuat
+                        tunnel, akan muncul Tunnel ID yang dibutuhkan untuk
+                        konfigurasi. Format:
+                        <code>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 11 -->
+            <div class="section" id="step11">
+                <div class="section-header">
+                    <div class="section-number">11</div>
+                    <h2>Configure Tunnel</h2>
+                </div>
+                <p>Buat file konfigurasi dan route DNS.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">Create Config File</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="command">nano ~/.cloudflared/config.yml</span></pre>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">Config YAML</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="keyword">tunnel</span>: <span class="string">&lt;TUNNEL_ID&gt;</span>
+<span class="keyword">credentials-file</span>: <span class="string">/root/.cloudflared/&lt;TUNNEL_ID&gt;.json</span>
+
+<span class="keyword">ingress</span>:
+  - <span class="keyword">hostname</span>: <span class="string">donarazhar.site</span>
+    <span class="keyword">service</span>: <span class="string">http://localhost:80</span>
+  - <span class="keyword">hostname</span>: <span class="string">www.donarazhar.site</span>
+    <span class="keyword">service</span>: <span class="string">http://localhost:80</span>
+  - <span class="keyword">service</span>: <span class="string">http_status:404</span></pre>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">Route DNS</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="comment"># Route domain ke tunnel</span>
+<span class="command">cloudflared tunnel route dns myblog donarazhar.site</span>
+<span class="command">cloudflared tunnel route dns myblog www.donarazhar.site</span></pre>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">Update Laravel .env</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="comment"># Update APP_URL di .env</span>
+<span class="command">nano /var/www/myblog/.env</span>
+
+<span class="comment"># Ubah menjadi:</span>
+<span class="string">APP_URL=https://donarazhar.site</span>
+
+<span class="comment"># Clear cache</span>
+<span class="command">cd /var/www/myblog && php artisan config:cache</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 12 -->
+            <div class="section" id="step12">
+                <div class="section-header">
+                    <div class="section-number">12</div>
+                    <h2>Run as Service</h2>
+                </div>
+                <p>
+                    Jalankan tunnel sebagai system service agar auto-start saat
+                    boot.
+                </p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">Test & Install Service</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            Copy
+                        </button>
+                    </div>
+                    <div class="code-content">
+                        <pre><span class="comment"># Test tunnel (Ctrl+C untuk stop)</span>
+<span class="command">cloudflared tunnel run myblog</span>
+
+<span class="comment"># Jika berhasil, install sebagai service</span>
+<span class="command">cloudflared service install</span>
+<span class="command">systemctl start cloudflared</span>
+<span class="command">systemctl enable cloudflared</span>
+
+<span class="comment"># Cek status</span>
+<span class="command">systemctl status cloudflared</span></pre>
+                    </div>
+                </div>
+
+                <div class="note">
+                    <span class="note-icon">🎉</span>
+                    <div class="note-content">
+                        <strong>Deployment Complete!</strong> Website sekarang
+                        dapat diakses di: <br />•
+                        <code>https://donarazhar.site</code> <br />•
+                        <code>https://www.donarazhar.site</code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <p>
+                    MyBlog Deployment Guide &bull; Created by
+                    <a href="https://github.com/donarazhar">Donar Azhar</a>
+                </p>
+            </div>
+        </div>
+
+        <script>
+            function copyCode(button) {
+                const codeBlock = button.closest(".code-block");
+                const code = codeBlock.querySelector("pre").innerText;
+                navigator.clipboard.writeText(code);
+                button.textContent = "Copied!";
+                setTimeout(() => (button.textContent = "Copy"), 2000);
+            }
+        </script>
+    </body>
+</html>

@@ -86,9 +86,9 @@
                 </div>
 
                 <div>
-                    <label for="social_linkedin" class="block text-sm font-medium text-slate-700 mb-2">LinkedIn</label>
-                    <input type="url" id="social_linkedin" name="social_linkedin" value="{{ $settings['social_linkedin'] }}"
-                        class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="https://linkedin.com/...">
+                    <label for="social_tiktok" class="block text-sm font-medium text-slate-700 mb-2">TikTok</label>
+                    <input type="url" id="social_tiktok" name="social_tiktok" value="{{ $settings['social_tiktok'] ?? '' }}"
+                        class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="https://tiktok.com/@...">
                 </div>
 
                 <div>

@@ -14,30 +14,20 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <!-- Text Content -->
             <div class="text-center lg:text-left">
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-                    Membangun <span class="text-gray-400">Aplikasi</span><br>
-                    untuk Masa Depan
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight uppercase">
+                    Iqra' <span class="text-gray-400">bismi rabbikalladzi</span><br>
+                    khalaq
                 </h1>
                 <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto lg:mx-0 mb-10">
-                    Kami adalah tim developer berpengalaman yang membantu mewujudkan ide Anda menjadi aplikasi yang powerful dan user-friendly.
+                    Landasi setiap aktivitas literasi, riset, dan teknologi dengan niat karena Allah agar ilmu pengetahuan yang diraih mendatangkan keberkahan sejati bagi umat.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                    <a href="{{ route('articles.index') }}" class="inline-flex items-center justify-center px-8 py-4 bg-white text-black font-semibold rounded-xl shadow-lg hover:bg-gray-100 hover:scale-105 transition-all duration-300">
-                        Lihat Artikel
-                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                        </svg>
-                    </a>
-                    <a href="{{ route('contact') }}" class="inline-flex items-center justify-center px-8 py-4 bg-transparent text-white font-semibold rounded-xl border border-white/30 hover:bg-white/10 transition-all duration-300">
-                        Hubungi Kami
-                    </a>
-                </div>
+
             </div>
 
             <!-- Profile Image - Floating Animation -->
             <div class="flex justify-center lg:justify-end">
                 <div class="relative animate-float">
-                    <div class="w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl">
+                    <div class="w-[50vh] h-[50vh] md:w-[55vh] md:h-[55vh] lg:w-[60vh] lg:h-[60vh] max-w-80 max-h-80 md:max-w-96 md:max-h-96 lg:max-w-none lg:max-h-none rounded-full overflow-hidden border-4 border-white/20 shadow-2xl">
                         <img src="{{ asset('img/myimage.png') }}" alt="Profile" class="w-full h-full object-cover object-top">
                     </div>
                     <!-- Decorative Ring -->
@@ -62,7 +52,7 @@
     <div class="content-container px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
             <h2 class="text-3xl md:text-4xl font-bold text-black mb-4">Artikel Terbaru</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">Baca artikel-artikel terbaru tentang pembuatan aplikasi dan teknologi</p>
+            <p class="text-gray-600 max-w-2xl mx-auto">Artikel terbaru & aplikasi yang saya kerjakan, semoga bermanfaat.</p>
         </div>
 
         <div class="space-y-4">

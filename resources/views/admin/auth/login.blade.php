@@ -24,12 +24,11 @@
         <!-- Logo -->
         <div class="text-center mb-8">
             <a href="{{ route('home') }}" class="inline-flex items-center space-x-2">
-                <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg">
-                    <span class="text-black font-bold text-xl">M</span>
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center overflow-hidden shadow-lg">
+                    <img src="{{ asset('img/favicon.png') }}" alt="Logo" class="w-full h-full object-cover">
                 </div>
-                <span class="text-2xl font-bold text-white">MyBlog</span>
+                <span class="text-2xl font-bold text-white">DnrAzhr Blog</span>
             </a>
-            <h1 class="text-white text-xl mt-4">Admin Panel</h1>
         </div>
 
         <!-- Login Form -->
