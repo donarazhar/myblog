@@ -59,6 +59,7 @@ class DatabaseSeeder extends Seeder
             FbEngagementArticleSeeder::class,
             AiPhotoEditingArticleSeeder::class,
             IttdLearnhubArticleSeeder::class,
+            MyblogArticleSeeder::class,
         ]);
     }
 }
