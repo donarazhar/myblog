@@ -5,7 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="@yield('meta_description', 'Company Profile & Portfolio - Pembuatan Aplikasi')">
-    <title>@yield('title', 'My Blog') | {{ config('app.name') }}</title>
+    <title>@yield('title', 'DnrAzhr Blog') | {{ config('app.name') }}</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="@yield('title', 'My Blog') | {{ config('app.name') }}">
+    <meta property="og:description" content="@yield('meta_description', 'Company Profile & Portfolio - Pembuatan Aplikasi')">
+    <meta property="og:image" content="@yield('meta_image', asset('img/myimage.png'))">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ url()->current() }}">
+    <meta property="twitter:title" content="@yield('title', 'My Blog') | {{ config('app.name') }}">
+    <meta property="twitter:description" content="@yield('meta_description', 'Company Profile & Portfolio - Pembuatan Aplikasi')">
+    <meta property="twitter:image" content="@yield('meta_image', asset('img/myimage.png'))">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
