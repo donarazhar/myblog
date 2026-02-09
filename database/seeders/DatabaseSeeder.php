@@ -60,6 +60,7 @@ class DatabaseSeeder extends Seeder
             AiPhotoEditingArticleSeeder::class,
             IttdLearnhubArticleSeeder::class,
             MyblogArticleSeeder::class,
+            FramingArticleSeeder::class,
         ]);
     }
 }
