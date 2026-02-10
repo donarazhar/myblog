@@ -3,7 +3,7 @@
 @section('title', $article->title)
 @section('meta_description', $article->excerpt ?? Str::limit(strip_tags($article->content), 160))
 @if($article->featured_image)
-@section('meta_image', Storage::url($article->featured_image))
+@section('meta_image', url(Storage::url($article->featured_image)))
 @endif
 @section('og_type', 'article')
 
