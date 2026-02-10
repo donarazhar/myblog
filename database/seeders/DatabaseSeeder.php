@@ -65,6 +65,8 @@ class DatabaseSeeder extends Seeder
             KaskecilProcessArticleSeeder::class,
             ServerSecurityBackupArticleSeeder::class,
             FramingArticleSeeder::class,
+            DataPribadiArticleSeeder::class,
+            BuletinLiterasiDigitalArticleSeeder::class,
         ]);
     }
 }
