@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="@yield('meta_description', 'Company Profile & Portfolio - Pembuatan Aplikasi')">
+    <meta name="description" content="@yield('meta_description', 'Iqra bismi rabbikalladzi khalaq - Landasi setiap aktivitas literasi, riset, dan teknologi dengan niat karena Allah.')">
     <title>@yield('title', 'DnrAzhr Blog') | {{ config('app.name') }}</title>
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="@yield('og_type', 'website')">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:title" content="@yield('title', 'My Blog') | {{ config('app.name') }}">
-    <meta property="og:description" content="@yield('meta_description', 'Company Profile & Portfolio - Pembuatan Aplikasi')">
+    <meta property="og:description" content="@yield('meta_description', 'Iqra bismi rabbikalladzi khalaq - Landasi setiap aktivitas literasi, riset, dan teknologi dengan niat karena Allah.')">
     @hasSection('meta_image')
     <meta property="og:image" content="{{ url(@yield('meta_image')) }}">
     @else
@@ -24,7 +24,7 @@
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="{{ url()->current() }}">
     <meta property="twitter:title" content="@yield('title', 'My Blog') | {{ config('app.name') }}">
-    <meta property="twitter:description" content="@yield('meta_description', 'Company Profile & Portfolio - Pembuatan Aplikasi')">
+    <meta property="twitter:description" content="@yield('meta_description', 'Iqra bismi rabbikalladzi khalaq - Landasi setiap aktivitas literasi, riset, dan teknologi dengan niat karena Allah.')">
     @hasSection('meta_image')
     <meta property="twitter:image" content="{{ url(@yield('meta_image')) }}">
     @else
