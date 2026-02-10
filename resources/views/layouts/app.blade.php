@@ -12,7 +12,7 @@
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:title" content="@yield('title', 'My Blog') | {{ config('app.name') }}">
     <meta property="og:description" content="@yield('meta_description', 'Iqra bismi rabbikalladzi khalaq - Landasi setiap aktivitas literasi, riset, dan teknologi dengan niat karena Allah.')">
-    <meta property="og:image" content="@yield('meta_image', '{{ asset('img/myimage.png') }}')">
+    <meta property="og:image" content="@yield('meta_image', asset('img/myimage.png'))">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
@@ -21,7 +21,7 @@
     <meta property="twitter:url" content="{{ url()->current() }}">
     <meta property="twitter:title" content="@yield('title', 'My Blog') | {{ config('app.name') }}">
     <meta property="twitter:description" content="@yield('meta_description', 'Iqra bismi rabbikalladzi khalaq - Landasi setiap aktivitas literasi, riset, dan teknologi dengan niat karena Allah.')">
-    <meta property="twitter:image" content="@yield('meta_image', '{{ asset('img/myimage.png') }}')">
+    <meta property="twitter:image" content="@yield('meta_image', asset('img/myimage.png'))">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
