@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Home')
+@section('meta_description', "Iqra' bismi rabbikalladzi khalaq - Landasi setiap aktivitas literasi, riset, dan teknologi dengan niat karena Allah agar ilmu pengetahuan yang diraih mendatangkan keberkahan sejati bagi umat.")
 
 @section('content')
 <!-- Hero Section - Full Width Background -->
