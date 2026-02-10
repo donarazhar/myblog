@@ -7,6 +7,23 @@
     <meta name="description" content="@yield('meta_description', 'Iqra bismi rabbikalladzi khalaq - Landasi setiap aktivitas literasi, riset, dan teknologi dengan niat karena Allah.')">
     <title>@yield('title', 'DnrAzhr Blog') | {{ config('app.name') }}</title>
 
+    <!-- Google Analytics -->
+    @if(config('services.google.analytics_id'))
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.google.analytics_id') }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', '{{ config('
+            services.google.analytics_id ') }}');
+    </script>
+    @endif
+
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="@yield('og_type', 'website')">
     <meta property="og:url" content="{{ url()->current() }}">
