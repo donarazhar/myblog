@@ -61,6 +61,7 @@ class DatabaseSeeder extends Seeder
             IttdLearnhubArticleSeeder::class,
             MyblogArticleSeeder::class,
             DeploymentGuideArticleSeeder::class,
+            TipsTricksArticleSeeder::class,
             FramingArticleSeeder::class,
         ]);
     }
