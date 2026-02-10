@@ -63,6 +63,7 @@ class DatabaseSeeder extends Seeder
             DeploymentGuideArticleSeeder::class,
             TipsTricksArticleSeeder::class,
             KaskecilProcessArticleSeeder::class,
+            ServerSecurityBackupArticleSeeder::class,
             FramingArticleSeeder::class,
         ]);
     }
