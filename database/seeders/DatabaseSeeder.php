@@ -67,6 +67,7 @@ class DatabaseSeeder extends Seeder
             FramingArticleSeeder::class,
             DataPribadiArticleSeeder::class,
             BuletinLiterasiDigitalArticleSeeder::class,
+            KamusDigitalParentingArticleSeeder::class,
         ]);
     }
 }
