@@ -68,6 +68,7 @@ class DatabaseSeeder extends Seeder
             DataPribadiArticleSeeder::class,
             BuletinLiterasiDigitalArticleSeeder::class,
             KamusDigitalParentingArticleSeeder::class,
+            HarddiskRecoveryArticleSeeder::class,
         ]);
     }
 }
