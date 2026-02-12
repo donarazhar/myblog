@@ -299,8 +299,8 @@
         };
 
         // ─── 1. Articles per Month (Area Chart) ───
-        const monthLabels = @json(collect($articlesPerMonth) - > pluck('label'));
-        const monthData = @json(collect($articlesPerMonth) - > pluck('count'));
+        const monthLabels = @json($chartMonthLabels);
+        const monthData = @json($chartMonthData);
 
         new Chart(document.getElementById('articlesPerMonthChart'), {
             type: 'line',
@@ -360,8 +360,8 @@
         });
 
         // ─── 2. Articles by Category (Doughnut Chart) ───
-        const catLabels = @json(collect($articlesPerCategory) - > pluck('name'));
-        const catData = @json(collect($articlesPerCategory) - > pluck('count'));
+        const catLabels = @json($chartCatLabels);
+        const catData = @json($chartCatData);
         const catColors = categoryColors.slice(0, catLabels.length);
 
         new Chart(document.getElementById('articlesByCategoryChart'), {
@@ -398,8 +398,8 @@
         });
 
         // ─── 3. Top 5 Most Viewed (Horizontal Bar Chart) ───
-        const topLabels = @json($topArticles - > pluck('title') - > map(fn($t) => \Illuminate\ Support\ Str::limit($t, 35)));
-        const topData = @json($topArticles - > pluck('views'));
+        const topLabels = @json($chartTopLabels);
+        const topData = @json($chartTopData);
         const barColors = [colors.indigo, colors.purple, colors.teal, colors.rose, colors.amber];
 
         new Chart(document.getElementById('topArticlesChart'), {
@@ -459,15 +459,7 @@
             data: {
                 labels: ['Published', 'Draft'],
                 datasets: [{
-                    data: [{
-                        {
-                            $statusDistribution['published']
-                        }
-                    }, {
-                        {
-                            $statusDistribution['draft']
-                        }
-                    }],
+                    data: @json(array_values($statusDistribution)),
                     backgroundColor: [colors.emerald.bg, colors.amber.bg],
                     borderColor: [colors.emerald.border, colors.amber.border],
                     borderWidth: 2,
