@@ -9,7 +9,7 @@
 </div>
 
 <!-- Stats Cards -->
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 mb-8">
     <div class="bg-white rounded-xl shadow-lg p-5 border-l-4 border-indigo-600">
         <div class="flex items-center justify-between">
             <div>
