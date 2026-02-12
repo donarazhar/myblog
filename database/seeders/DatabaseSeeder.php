@@ -70,6 +70,7 @@ class DatabaseSeeder extends Seeder
             KamusDigitalParentingArticleSeeder::class,
             HarddiskRecoveryArticleSeeder::class,
             ItqanManajemenMutuArticleSeeder::class,
+            GenerasiIqraArticleSeeder::class,
         ]);
     }
 }
