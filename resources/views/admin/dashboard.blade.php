@@ -494,13 +494,13 @@
             const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             document.getElementById('calMonthYear').textContent = monthNames[month] + ' ' + year;
 
-            const firstDay = new Date(year, month, 1).getDay(); // 0=Sun
+            const firstDay = new Date(year, month, 1).getDay();
             const daysInMonth = new Date(year, month + 1, 0).getDate();
             const today = new Date();
 
             // Build date map for this month
             const dateMap = {};
-            pubDates.forEach(p => {
+            pubDates.forEach(function(p) {
                 const d = new Date(p.date);
                 if (d.getFullYear() === year && d.getMonth() === month) {
                     const key = d.getDate();
@@ -509,31 +509,48 @@
                 }
             });
 
-            let html = '<div class="grid grid-cols-7 gap-1 text-center">';
+            let html = '<div style="display:grid; grid-template-columns:repeat(7,1fr); gap:4px; text-align:center;">';
             // Day headers
-            ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(d => {
-                html += '<div class="text-xs font-semibold text-slate-400 py-2">' + d + '</div>';
-            });
+            var dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            for (var di = 0; di < dayNames.length; di++) {
+                html += '<div style="font-size:12px; font-weight:600; color:#94a3b8; padding:8px 0; border-bottom:2px solid #f1f5f9;">' + dayNames[di] + '</div>';
+            }
             // Empty cells before first day
-            for (let i = 0; i < firstDay; i++) {
-                html += '<div class="py-2"></div>';
+            for (var i = 0; i < firstDay; i++) {
+                html += '<div style="padding:8px 0;"></div>';
             }
             // Day cells
-            for (let day = 1; day <= daysInMonth; day++) {
-                const isToday = (today.getFullYear() === year && today.getMonth() === month && today.getDate() === day);
-                const hasArticle = dateMap[day];
-                let classes = 'relative py-2 rounded-lg text-sm cursor-default transition-colors ';
-                if (isToday) {
-                    classes += 'bg-indigo-600 text-white font-bold ';
+            for (var day = 1; day <= daysInMonth; day++) {
+                var isToday = (today.getFullYear() === year && today.getMonth() === month && today.getDate() === day);
+                var hasArticle = dateMap[day];
+                var style = 'position:relative; padding:8px 4px; border-radius:8px; font-size:14px; cursor:default; transition:all 0.15s; ';
+                var dotColor = '';
+
+                if (isToday && hasArticle) {
+                    style += 'background:#4f46e5; color:#ffffff; font-weight:700; box-shadow:0 2px 8px rgba(79,70,229,0.35);';
+                    dotColor = '#ffffff';
+                } else if (isToday) {
+                    style += 'background:#4f46e5; color:#ffffff; font-weight:700; box-shadow:0 2px 8px rgba(79,70,229,0.35);';
                 } else if (hasArticle) {
-                    classes += 'bg-indigo-50 text-indigo-700 font-semibold hover:bg-indigo-100 ';
+                    style += 'background:#dcfce7; color:#166534; font-weight:600; border:1px solid #bbf7d0;';
+                    dotColor = '#16a34a';
                 } else {
-                    classes += 'text-slate-600 hover:bg-slate-50 ';
+                    style += 'color:#475569;';
                 }
-                html += '<div class="' + classes + '" ' + (hasArticle ? 'data-articles="' + hasArticle.map(t => t.replace(/"/g, '&quot;')).join('|') + '"' : '') + '>';
-                html += day;
+
+                var dataAttr = '';
                 if (hasArticle) {
-                    html += '<span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full ' + (isToday ? 'bg-white' : 'bg-indigo-500') + '"></span>';
+                    var titles = [];
+                    for (var ti = 0; ti < hasArticle.length; ti++) {
+                        titles.push(hasArticle[ti].replace(/"/g, '&quot;'));
+                    }
+                    dataAttr = ' data-articles="' + titles.join('|') + '"';
+                }
+
+                html += '<div style="' + style + '"' + dataAttr + '>';
+                html += day;
+                if (dotColor) {
+                    html += '<span style="position:absolute; bottom:2px; left:50%; transform:translateX(-50%); width:5px; height:5px; border-radius:50%; background:' + dotColor + ';"></span>';
                 }
                 html += '</div>';
             }
@@ -541,20 +558,28 @@
             document.getElementById('calendarGrid').innerHTML = html;
 
             // Tooltips
-            const tooltip = document.getElementById('calTooltip');
-            document.querySelectorAll('[data-articles]').forEach(el => {
-                el.addEventListener('mouseenter', function(e) {
-                    const titles = this.dataset.articles.split('|');
-                    tooltip.innerHTML = titles.map(t => '• ' + t).join('<br>');
-                    tooltip.classList.remove('hidden');
-                    const rect = this.getBoundingClientRect();
-                    tooltip.style.left = rect.left + 'px';
-                    tooltip.style.top = (rect.bottom + 6) + 'px';
-                });
-                el.addEventListener('mouseleave', function() {
-                    tooltip.classList.add('hidden');
-                });
-            });
+            var tooltip = document.getElementById('calTooltip');
+            var articleCells = document.querySelectorAll('[data-articles]');
+            for (var ci = 0; ci < articleCells.length; ci++) {
+                (function(el) {
+                    el.addEventListener('mouseenter', function(e) {
+                        var titles = this.dataset.articles.split('|');
+                        var tipHtml = '';
+                        for (var j = 0; j < titles.length; j++) {
+                            tipHtml += '• ' + titles[j];
+                            if (j < titles.length - 1) tipHtml += '<br>';
+                        }
+                        tooltip.innerHTML = tipHtml;
+                        tooltip.classList.remove('hidden');
+                        var rect = this.getBoundingClientRect();
+                        tooltip.style.left = rect.left + 'px';
+                        tooltip.style.top = (rect.bottom + 6) + 'px';
+                    });
+                    el.addEventListener('mouseleave', function() {
+                        tooltip.classList.add('hidden');
+                    });
+                })(articleCells[ci]);
+            }
         }
 
         document.getElementById('calPrev').addEventListener('click', () => {
