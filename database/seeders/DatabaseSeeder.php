@@ -71,6 +71,7 @@ class DatabaseSeeder extends Seeder
             HarddiskRecoveryArticleSeeder::class,
             ItqanManajemenMutuArticleSeeder::class,
             GenerasiIqraArticleSeeder::class,
+            JejakDigitalArticleSeeder::class,
         ]);
     }
 }
