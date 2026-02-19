@@ -8,6 +8,7 @@
 @section('og_type', 'article')
 
 @push('structured_data')
+{{-- Article Schema --}}
 <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -37,6 +38,7 @@
         "url": "{{ route('articles.show', $article->slug) }}"
     }
 </script>
+{{-- Breadcrumb Schema --}}
 <script type="application/ld+json">
     {
         "@context": "https://schema.org",
