@@ -75,6 +75,7 @@ class DatabaseSeeder extends Seeder
             PostTruthArticleSeeder::class,
             SeoImplementationArticleSeeder::class,
             GoogleDriveBackupArticleSeeder::class,
+            VoiceScamArticleSeeder::class,
         ]);
     }
 }
