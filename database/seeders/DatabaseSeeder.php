@@ -73,6 +73,7 @@ class DatabaseSeeder extends Seeder
             GenerasiIqraArticleSeeder::class,
             JejakDigitalArticleSeeder::class,
             PostTruthArticleSeeder::class,
+            SeoImplementationArticleSeeder::class,
         ]);
     }
 }
