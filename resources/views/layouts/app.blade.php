@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="@yield('meta_description', 'Iqra bismi rabbikalladzi khalaq - Landasi setiap aktivitas literasi, riset, dan teknologi dengan niat karena Allah.')">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="DnrAzhr">
+    <link rel="canonical" href="{{ url()->current() }}">
     <title>@yield('title', 'DnrAzhr Blog') | {{ config('app.name') }}</title>
 
     <!-- Google Analytics -->
@@ -41,6 +44,23 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "DnrAzhr Blog",
+            "url": "{{ url('/') }}",
+            "description": "Iqra bismi rabbikalladzi khalaq - Landasi setiap aktivitas literasi, riset, dan teknologi dengan niat karena Allah.",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "{{ url('/articles') }}?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        }
+    </script>
+    @stack('structured_data')
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

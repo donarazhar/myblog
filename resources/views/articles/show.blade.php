@@ -7,6 +7,74 @@
 @endif
 @section('og_type', 'article')
 
+@push('structured_data')
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "{{ $article->title }}",
+        "description": "{{ $article->excerpt ?? Str::limit(strip_tags($article->content), 160) }}",
+        "author": {
+            "@type": "Person",
+            "name": "{{ $article->user->name ?? 'Admin' }}"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "DnrAzhr Blog",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{{ asset('img/favicon.png') }}"
+            }
+        },
+        "datePublished": "{{ $article->published_at->toIso8601String() }}",
+        "dateModified": "{{ $article->updated_at->toIso8601String() }}",
+        @if($article - > featured_image)
+        "image": "{{ url(Storage::url($article->featured_image)) }}",
+        @endif "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{ route('articles.show', $article->slug) }}"
+        },
+        "url": "{{ route('articles.show', $article->slug) }}"
+    }
+</script>
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "{{ url('/') }}"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Articles",
+                "item": "{{ route('articles.index') }}"
+            }
+            @if($article - > category), {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "{{ $article->category->name }}",
+                "item": "{{ route('articles.category', $article->category->slug) }}"
+            },
+            {
+                "@type": "ListItem",
+                "position": 4,
+                "name": "{{ $article->title }}"
+            }
+            @else, {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "{{ $article->title }}"
+            }
+            @endif
+        ]
+    }
+</script>
+@endpush
+
 @section('content')
 <!-- Article Header -->
 <section class="relative pt-24 pb-12 bg-black overflow-hidden">
