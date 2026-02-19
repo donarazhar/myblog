@@ -74,6 +74,7 @@ class DatabaseSeeder extends Seeder
             JejakDigitalArticleSeeder::class,
             PostTruthArticleSeeder::class,
             SeoImplementationArticleSeeder::class,
+            GoogleDriveBackupArticleSeeder::class,
         ]);
     }
 }
