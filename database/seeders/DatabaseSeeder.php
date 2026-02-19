@@ -72,6 +72,7 @@ class DatabaseSeeder extends Seeder
             ItqanManajemenMutuArticleSeeder::class,
             GenerasiIqraArticleSeeder::class,
             JejakDigitalArticleSeeder::class,
+            PostTruthArticleSeeder::class,
         ]);
     }
 }
