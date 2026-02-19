@@ -11,29 +11,29 @@
 {{-- Article Schema --}}
 <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@type": "Article",
+        "@@context": "https://schema.org",
+        "@@type": "Article",
         "headline": "{{ $article->title }}",
         "description": "{{ $article->excerpt ?? Str::limit(strip_tags($article->content), 160) }}",
         "author": {
-            "@type": "Person",
+            "@@type": "Person",
             "name": "{{ $article->user->name ?? 'Admin' }}"
         },
         "publisher": {
-            "@type": "Organization",
+            "@@type": "Organization",
             "name": "DnrAzhr Blog",
             "logo": {
-                "@type": "ImageObject",
+                "@@type": "ImageObject",
                 "url": "{{ asset('img/favicon.png') }}"
             }
         },
         "datePublished": "{{ $article->published_at->toIso8601String() }}",
         "dateModified": "{{ $article->updated_at->toIso8601String() }}",
-        @if($article - > featured_image)
+        @if($article -> featured_image)
         "image": "{{ url(Storage::url($article->featured_image)) }}",
         @endif "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "{{ route('articles.show', $article->slug) }}"
+            "@@type": "WebPage",
+            "@@id": "{{ route('articles.show', $article->slug) }}"
         },
         "url": "{{ route('articles.show', $article->slug) }}"
     }
@@ -41,33 +41,33 @@
 {{-- Breadcrumb Schema --}}
 <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
+        "@@context": "https://schema.org",
+        "@@type": "BreadcrumbList",
         "itemListElement": [{
-                "@type": "ListItem",
+                "@@type": "ListItem",
                 "position": 1,
                 "name": "Home",
                 "item": "{{ url('/') }}"
             },
             {
-                "@type": "ListItem",
+                "@@type": "ListItem",
                 "position": 2,
                 "name": "Articles",
                 "item": "{{ route('articles.index') }}"
             }
-            @if($article - > category), {
-                "@type": "ListItem",
+            @if($article -> category), {
+                "@@type": "ListItem",
                 "position": 3,
                 "name": "{{ $article->category->name }}",
                 "item": "{{ route('articles.category', $article->category->slug) }}"
             },
             {
-                "@type": "ListItem",
+                "@@type": "ListItem",
                 "position": 4,
                 "name": "{{ $article->title }}"
             }
             @else, {
-                "@type": "ListItem",
+                "@@type": "ListItem",
                 "position": 3,
                 "name": "{{ $article->title }}"
             }

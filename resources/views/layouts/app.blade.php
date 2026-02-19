@@ -48,13 +48,13 @@
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
         {
-            "@context": "https://schema.org",
-            "@type": "WebSite",
+            "@@context": "https://schema.org",
+            "@@type": "WebSite",
             "name": "DnrAzhr Blog",
             "url": "{{ url('/') }}",
             "description": "Iqra bismi rabbikalladzi khalaq - Landasi setiap aktivitas literasi, riset, dan teknologi dengan niat karena Allah.",
             "potentialAction": {
-                "@type": "SearchAction",
+                "@@type": "SearchAction",
                 "target": "{{ url('/articles') }}?q={search_term_string}",
                 "query-input": "required name=search_term_string"
             }
