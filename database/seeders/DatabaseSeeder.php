@@ -79,6 +79,7 @@ class DatabaseSeeder extends Seeder
             ApiGatewayLbReverseProxyArticleSeeder::class,
             ApiAuthenticationArticleSeeder::class,
             ContainerVmKernelArticleSeeder::class,
+            CapcutTricksArticleSeeder::class,
         ]);
     }
 }
