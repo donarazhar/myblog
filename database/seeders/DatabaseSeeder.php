@@ -77,6 +77,7 @@ class DatabaseSeeder extends Seeder
             GoogleDriveBackupArticleSeeder::class,
             VoiceScamArticleSeeder::class,
             ApiGatewayLbReverseProxyArticleSeeder::class,
+            ApiAuthenticationArticleSeeder::class,
         ]);
     }
 }
