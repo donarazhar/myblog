@@ -80,6 +80,7 @@ class DatabaseSeeder extends Seeder
             ApiAuthenticationArticleSeeder::class,
             ContainerVmKernelArticleSeeder::class,
             CapcutTricksArticleSeeder::class,
+            CanvaTipsArticleSeeder::class,
         ]);
     }
 }
