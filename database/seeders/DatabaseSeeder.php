@@ -78,6 +78,7 @@ class DatabaseSeeder extends Seeder
             VoiceScamArticleSeeder::class,
             ApiGatewayLbReverseProxyArticleSeeder::class,
             ApiAuthenticationArticleSeeder::class,
+            ContainerVmKernelArticleSeeder::class,
         ]);
     }
 }
