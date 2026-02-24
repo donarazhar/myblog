@@ -12,7 +12,7 @@ class ArticleController extends Controller
         $articles = Article::published()
             ->with(['user', 'category'])
             ->latest('published_at')
-            ->paginate(9);
+            ->paginate(10);
 
         $categories = Category::withCount(['articles' => function ($query) {
             $query->published();
