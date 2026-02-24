@@ -81,6 +81,7 @@ class DatabaseSeeder extends Seeder
             ContainerVmKernelArticleSeeder::class,
             CapcutTricksArticleSeeder::class,
             CanvaTipsArticleSeeder::class,
+            JejakDigitalLpdpArticleSeeder::class,
         ]);
     }
 }
