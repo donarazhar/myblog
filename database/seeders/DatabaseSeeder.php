@@ -82,6 +82,7 @@ class DatabaseSeeder extends Seeder
             CapcutTricksArticleSeeder::class,
             CanvaTipsArticleSeeder::class,
             JejakDigitalLpdpArticleSeeder::class,
+            BrdPrdErdArticleSeeder::class,
         ]);
     }
 }
