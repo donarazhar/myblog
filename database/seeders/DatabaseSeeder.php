@@ -83,6 +83,7 @@ class DatabaseSeeder extends Seeder
             CanvaTipsArticleSeeder::class,
             JejakDigitalLpdpArticleSeeder::class,
             BrdPrdErdArticleSeeder::class,
+            UmlApiDocsSowArticleSeeder::class,
         ]);
     }
 }
