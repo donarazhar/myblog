@@ -85,6 +85,7 @@ class DatabaseSeeder extends Seeder
             BrdPrdErdArticleSeeder::class,
             UmlApiDocsSowArticleSeeder::class,
             AgilePrdWireframeKanbanArticleSeeder::class,
+            PenipuanLebaranArticleSeeder::class,
         ]);
     }
 }
