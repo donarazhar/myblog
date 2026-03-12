@@ -89,6 +89,7 @@ class DatabaseSeeder extends Seeder
             StudiKasusMyblogBrdPrdErdArticleSeeder::class,
             DdosStressTestMitigasiArticleSeeder::class,
             MoodleScormElearningArticleSeeder::class,
+            UploadScormMoodleArticleSeeder::class,
         ]);
     }
 }
