@@ -88,6 +88,7 @@ class DatabaseSeeder extends Seeder
             PenipuanLebaranArticleSeeder::class,
             StudiKasusMyblogBrdPrdErdArticleSeeder::class,
             DdosStressTestMitigasiArticleSeeder::class,
+            MoodleScormElearningArticleSeeder::class,
         ]);
     }
 }
