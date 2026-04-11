@@ -90,6 +90,7 @@ class DatabaseSeeder extends Seeder
             DdosStressTestMitigasiArticleSeeder::class,
             MoodleScormElearningArticleSeeder::class,
             UploadScormMoodleArticleSeeder::class,
+            SabarEraModernArticleSeeder::class,
         ]);
     }
 }
