@@ -91,6 +91,7 @@ class DatabaseSeeder extends Seeder
             MoodleScormElearningArticleSeeder::class,
             UploadScormMoodleArticleSeeder::class,
             SabarEraModernArticleSeeder::class,
+            PerformanceTestingArticleSeeder::class,
         ]);
     }
 }
