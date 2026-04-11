@@ -92,6 +92,7 @@ class DatabaseSeeder extends Seeder
             UploadScormMoodleArticleSeeder::class,
             SabarEraModernArticleSeeder::class,
             PerformanceTestingArticleSeeder::class,
+            TechnologicalDeterminismArticleSeeder::class,
         ]);
     }
 }
