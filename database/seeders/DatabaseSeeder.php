@@ -93,6 +93,7 @@ class DatabaseSeeder extends Seeder
             SabarEraModernArticleSeeder::class,
             PerformanceTestingArticleSeeder::class,
             TechnologicalDeterminismArticleSeeder::class,
+            PhishingArticleSeeder::class,
         ]);
     }
 }
