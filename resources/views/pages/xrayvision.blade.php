@@ -105,11 +105,10 @@
     <div id="wrap">
         <video id="vid" autoplay playsinline muted></video>
         <canvas id="cv"></canvas>
-        <div id="status">INITIALIZING...</div>
+        <div id="status">MEMULAI...</div>
         <div id="frame-counter">FRM: 0000</div>
-        <a href="{{ route('home') }}" class="back-btn">← BACK TO BLOG</a>
-        <div id="loader">LOADING DUAL NEURAL ENGINE...<br><span style="font-size:12px;color:#0088ff">Hands & Pose
-                Modules</span></div>
+        <a href="{{ route('home') }}" class="back-btn">← KEMBALI KE BLOG</a>
+        <div id="loader">MEMUAT MESIN NEURAL GANDA...<br><span style="font-size:12px;color:#0088ff">Modul Tangan & Postur</span></div>
     </div>
 
     <!-- MediaPipe Holistic -->
@@ -341,8 +340,8 @@
         function drawHudNodes() {
             const bY = H - 52;
             const nodes = [
-                { x: 55, label: 'INPUT' }, { x: 145, label: 'DETECT' }, { x: 245, label: 'POSE' },
-                { x: 345, label: 'PORTAL' }, { x: 445, label: 'COMP' }, { x: 540, label: 'OUTPUT' },
+                { x: 55, label: 'INPUT' }, { x: 145, label: 'DETEKSI' }, { x: 245, label: 'POSTUR' },
+                { x: 345, label: 'PORTAL' }, { x: 445, label: 'KOMP' }, { x: 540, label: 'OUTPUT' },
             ];
             ctx.save();
             nodes.forEach((n, i) => {
@@ -364,8 +363,8 @@
 
             if (portalAlpha > 0.05 && currentHands && currentHands.length >= 2) {
                 ctx.fillStyle = '#00ffcc'; ctx.font = '9px Courier New'; ctx.textAlign = 'right';
-                ctx.fillText(`SYS.ONLINE // NEURAL_XRAY_V5`, W - 20, H - 35);
-                ctx.fillText(`PARTICLES: 5,000 // CORE: STABLE`, W - 20, H - 20);
+                ctx.fillText(`SISTEM.ONLINE // NEURAL_XRAY_V5`, W - 20, H - 35);
+                ctx.fillText(`PARTIKEL: 5,000 // INTI: STABIL`, W - 20, H - 20);
             }
             ctx.restore();
         }
@@ -433,7 +432,7 @@
             }
             const isGlitching = frame < glitchUntil;
 
-            frameEl.textContent = `FRM: ${String(frame).padStart(4, '0')} ${isGlitching ? ' [ERR]' : ''}`;
+            frameEl.textContent = `FRM: ${String(frame).padStart(4, '0')} ${isGlitching ? ' [GALAT]' : ''}`;
 
             let lThumb, lIndex, rThumb, rIndex;
             let portalActiveThisFrame = false;
@@ -466,11 +465,11 @@
             portalAlpha = Math.max(0, Math.min(1, portalAlpha));
 
             if (!currentHands || currentHands.length < 2) {
-                statusEl.textContent = 'STANDBY: AWAITING BOTH HANDS'; statusEl.style.color = '#0055aa';
+                statusEl.textContent = 'SIAGA: MENUNGGU KEDUA TANGAN'; statusEl.style.color = '#0055aa';
             } else if (!isActive) {
-                statusEl.textContent = 'DETECTED: BRING FINGERS CLOSER (~150px)'; statusEl.style.color = '#00aaff';
+                statusEl.textContent = 'TERDETEKSI: DEKATKAN KEDUA TELUNJUK (~150px)'; statusEl.style.color = '#00aaff';
             } else {
-                statusEl.textContent = '[ PORTAL FULLY ACTIVE - STRETCH HANDS ]';
+                statusEl.textContent = '[ PORTAL AKTIF PENUH - RENTANGKAN TANGAN ]';
                 statusEl.style.color = isGlitching ? '#ff4444' : '#00ffcc';
                 statusEl.style.textShadow = `0 0 15px ${isGlitching ? '#ff0000' : '#00ffcc'}`;
             }
@@ -821,11 +820,11 @@
 
                         ctx.fillStyle = '#00ffff'; ctx.font = 'bold 9px Courier New'; ctx.textAlign = "left";
                         ctx.fillText('► NEURAL_CORE BIOSCAN', hudPos.x + 10, hudPos.y + 15);
-                        ctx.fillText(`► NODES: ${vizJoints}/33`, hudPos.x + 10, hudPos.y + 28);
+                        ctx.fillText(`► TITIK: ${vizJoints}/33`, hudPos.x + 10, hudPos.y + 28);
                         ctx.fillText(`► HEX: 0x${Math.floor(Math.random() * 0xFFFF).toString(16).toUpperCase()}`, hudPos.x + 10, hudPos.y + 41);
-                        ctx.fillText(`► STABILITY: ${(98 + Math.random() * 2).toFixed(1)}%`, hudPos.x + 10, hudPos.y + 54);
+                        ctx.fillText(`► STABILITAS: ${(98 + Math.random() * 2).toFixed(1)}%`, hudPos.x + 10, hudPos.y + 54);
                         ctx.fillText(`► FLUX:   ${(Math.random() * 1000).toFixed(0)} GHz`, hudPos.x + 10, hudPos.y + 67);
-                        ctx.fillText(`► STATUS: [SYNCHRONIZED]`, hudPos.x + 10, hudPos.y + 80);
+                        ctx.fillText(`► STATUS: [TERSINKRONISASI]`, hudPos.x + 10, hudPos.y + 80);
 
                         // Joint Tags (Micro-Telemetry)
                         [13, 14, 25, 26].forEach(idx => {
@@ -874,13 +873,13 @@
                             ctx.fillStyle = '#fff';
                             for (let j = 0; j < 200; j++) ctx.fillRect(px + Math.random() * pw, py + Math.random() * ph, 1, 1);
                             ctx.fillStyle = 'rgba(255,50,50,0.9)'; ctx.font = 'bold 16px Courier M';
-                            ctx.fillText('SCAN INTERRUPT', px + pw / 2 - 60, py + ph / 2);
+                            ctx.fillText('GANGGUAN PEMINDAIAN', px + pw / 2 - 70, py + ph / 2);
                         }
 
                         // 3D: Corrupt Text
                         ctx.fillStyle = 'rgba(255,50,50,0.7)'; ctx.font = '10px Courier New';
                         for (let i = 0; i < 5; i++) {
-                            const errs = ['0xFFE3 >> CORRUPT', '4A:2C:FF >> NULL', 'ERR: SEG FAULT', 'BUFFER UNDERRUN'];
+                            const errs = ['0xFFE3 >> KORUP', '4A:2C:FF >> NULL', 'ERROR: SEG FAULT', 'BUFFER UNDERRUN'];
                             ctx.fillText(errs[Math.floor(Math.random() * errs.length)], px + Math.random() * (pw - 100), py + Math.random() * ph);
                         }
                     }
@@ -945,14 +944,14 @@
                     stream = await navigator.mediaDevices.getUserMedia(constraints);
                 } catch (e) {
                     console.error("Camera error:", e);
-                    loaderEl.innerHTML = `CAMERA ERROR: ${e.name}`;
+                    loaderEl.innerHTML = `ERROR KAMERA: ${e.name}`;
                     return;
                 }
 
                 vid.srcObject = stream;
                 await vid.play();
                 loaderEl.style.display = 'none';
-                statusEl.textContent = 'SYSTEM READY';
+                statusEl.textContent = 'SISTEM SIAP';
 
                 const camera = new Camera(vid, {
                     onFrame: async () => { await holistic.send({ image: vid }); },
@@ -962,7 +961,7 @@
                 camera.start();
             } catch (err) {
                 console.error("Engine Start Error:", err);
-                loaderEl.innerHTML = "ENGINE INITIALIZATION FAILED";
+                loaderEl.innerHTML = "GAGAL MEMULAI MESIN NEURAL";
             }
         }
         startEngines();
