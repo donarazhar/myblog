@@ -489,7 +489,13 @@
 
     function isFingerUp(lm, fi) { return lm[fi*4+4].y < lm[fi*4+2].y; }
 
-    function detectPrimary(lm) {
+    // --- Gesture debounce: prevents flickering between DRAW/IDLE/ERASE ---
+    let _lastPrimaryGesture = GESTURES.IDLE;
+    let _primaryGestureCandidate = GESTURES.IDLE;
+    let _primaryGestureCount = 0;
+    const PRIMARY_DEBOUNCE_FRAMES = 3; // Need 3 consecutive frames to change gesture
+
+    function detectPrimaryRaw(lm) {
         if (!lm) return GESTURES.IDLE;
         const d = Math.sqrt((lm[4].x-lm[8].x)**2 + (lm[4].y-lm[8].y)**2);
         if (d < 0.05) return GESTURES.ERASE;
@@ -498,6 +504,23 @@
         if (idx && mid && !ring && !pinky) return GESTURES.MOVE;
         if (idx && !mid && !ring && !pinky) return GESTURES.DRAW;
         return GESTURES.IDLE;
+    }
+
+    function detectPrimary(lm) {
+        const raw = detectPrimaryRaw(lm);
+        if (raw === _primaryGestureCandidate) {
+            _primaryGestureCount++;
+        } else {
+            _primaryGestureCandidate = raw;
+            _primaryGestureCount = 1;
+        }
+        // Only switch gesture after enough consecutive frames confirm it
+        // Exception: switching FROM DRAW to IDLE needs more frames (prevents accidental drops)
+        const threshold = (_lastPrimaryGesture === GESTURES.DRAW && raw === GESTURES.IDLE) ? 5 : PRIMARY_DEBOUNCE_FRAMES;
+        if (_primaryGestureCount >= threshold) {
+            _lastPrimaryGesture = raw;
+        }
+        return _lastPrimaryGesture;
     }
 
     let lastPinchDist = null, lastHandAngle = null;
@@ -545,6 +568,12 @@
     let currentGesture = GESTURES.IDLE, currentCtrlGesture = CTRL.IDLE;
     let primaryLandmark = null, controlLandmark = null;
     let primaryTips = [], controlTips = [];
+
+    // --- Position smoothing buffer (Exponential Moving Average) ---
+    // Reduces hand-tracking jitter for much smoother drawing
+    let smoothedX = null, smoothedY = null;
+    const EMA_ALPHA = 0.4; // Lower = smoother but more lag. 0.4 is a good balance.
+    const MIN_DRAW_DISTANCE = 3; // Minimum pixel distance to add a new point
 
     function resize() { drawCanvas.width = window.innerWidth; drawCanvas.height = window.innerHeight; }
     resize(); window.addEventListener('resize', resize);
@@ -648,15 +677,42 @@
         } else { saveCurrentPath(); }
     }
 
-    function processPrimary(x, y) {
+    function processPrimary(rawX, rawY) {
+        // Apply EMA smoothing to raw hand position to reduce jitter
+        if (smoothedX === null) { smoothedX = rawX; smoothedY = rawY; }
+        else { smoothedX = smoothedX * (1 - EMA_ALPHA) + rawX * EMA_ALPHA; smoothedY = smoothedY * (1 - EMA_ALPHA) + rawY * EMA_ALPHA; }
+        const x = smoothedX, y = smoothedY;
+
         switch (currentGesture) {
             case 'DRAW':
-                if (!currentPath) { currentPath = { points: [{x,y}], color: settings.color, lineWidth: settings.lineWidth, glowIntensity: settings.glowIntensity }; lastPt = {x,y}; }
-                else { const f = 0.15; const sx = lastPt.x*f + x*(1-f), sy = lastPt.y*f + y*(1-f); currentPath.points.push({x:sx,y:sy}); lastPt = {x:sx,y:sy}; }
+                if (!currentPath) {
+                    currentPath = { points: [{x,y}], color: settings.color, lineWidth: settings.lineWidth, glowIntensity: settings.glowIntensity };
+                    lastPt = {x,y};
+                } else {
+                    // Only add point if finger moved enough (reduces noise)
+                    const dx = x - lastPt.x, dy = y - lastPt.y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    if (dist >= MIN_DRAW_DISTANCE) {
+                        currentPath.points.push({x, y});
+                        lastPt = {x, y};
+                    }
+                }
                 break;
-            case 'ERASE': saveCurrentPath(); const hits = sm.findIntersecting(x, y, 30); hits.forEach(id => sm.removeStroke(id)); break;
-            case 'CLEAR': saveCurrentPath(); sm.clear(); break;
-            default: saveCurrentPath(); break;
+            case 'ERASE':
+                saveCurrentPath();
+                smoothedX = null; smoothedY = null;
+                const hits = sm.findIntersecting(rawX, rawY, 30);
+                hits.forEach(id => sm.removeStroke(id));
+                break;
+            case 'CLEAR':
+                saveCurrentPath();
+                smoothedX = null; smoothedY = null;
+                sm.clear();
+                break;
+            default:
+                saveCurrentPath();
+                smoothedX = null; smoothedY = null;
+                break;
         }
     }
 
@@ -692,8 +748,20 @@
                 ctx.beginPath(); ctx.arc(pts[0].x, pts[0].y, stroke.lineWidth/2, 0, Math.PI*2);
                 ctx.fillStyle = isSel ? '#fff' : stroke.color; ctx.fill(); ctx.restore(); return;
             }
+            // Use quadratic curves for smooth rendering instead of jagged lineTo
             ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y);
-            for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+            if (pts.length === 2) {
+                ctx.lineTo(pts[1].x, pts[1].y);
+            } else {
+                for (let i = 1; i < pts.length - 1; i++) {
+                    const cpx = (pts[i].x + pts[i+1].x) / 2;
+                    const cpy = (pts[i].y + pts[i+1].y) / 2;
+                    ctx.quadraticCurveTo(pts[i].x, pts[i].y, cpx, cpy);
+                }
+                // Last segment
+                const last = pts[pts.length - 1];
+                ctx.lineTo(last.x, last.y);
+            }
             ctx.strokeStyle = isSel ? '#fff' : stroke.color;
             ctx.lineWidth = stroke.lineWidth * (stroke.transform?.scale || 1);
             ctx.lineCap = 'round'; ctx.lineJoin = 'round';
