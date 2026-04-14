@@ -113,9 +113,9 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="{{ route('home') }}" class="text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('home') ? 'text-black' : '' }}">Home</a>
-                    <a href="{{ route('about') }}" class="text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('about') ? 'text-black' : '' }}">About</a>
-                    <a href="{{ route('articles.index') }}" class="text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('articles.*') ? 'text-black' : '' }}">Articles</a>
+                    <a href="{{ route('home') }}" class="text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('home') ? 'text-black' : '' }}">Beranda</a>
+                    <a href="{{ route('about') }}" class="text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('about') ? 'text-black' : '' }}">Tentang</a>
+                    <a href="{{ route('articles.index') }}" class="text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('articles.*') ? 'text-black' : '' }}">Artikel</a>
 
                     <!-- Animasi Dropdown -->
                     <div class="relative" id="animasi-dropdown">
@@ -149,7 +149,7 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('contact') }}" class="text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('contact') ? 'text-black' : '' }}">Contact</a>
+                    <a href="{{ route('contact') }}" class="text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('contact') ? 'text-black' : '' }}">Kontak</a>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -164,9 +164,9 @@
         <!-- Mobile Menu -->
         <div class="hidden md:hidden bg-white border-t border-gray-200" id="mobile-menu">
             <div class="content-container px-4 py-4 space-y-2">
-                <a href="{{ route('home') }}" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-black font-medium transition-colors">Home</a>
-                <a href="{{ route('about') }}" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-black font-medium transition-colors">About</a>
-                <a href="{{ route('articles.index') }}" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-black font-medium transition-colors">Articles</a>
+                <a href="{{ route('home') }}" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-black font-medium transition-colors">Beranda</a>
+                <a href="{{ route('about') }}" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-black font-medium transition-colors">Tentang</a>
+                <a href="{{ route('articles.index') }}" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-black font-medium transition-colors">Artikel</a>
 
                 <!-- Mobile Animasi Submenu -->
                 <div>
@@ -193,7 +193,7 @@
                     </div>
                 </div>
 
-                <a href="{{ route('contact') }}" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-black font-medium transition-colors">Contact</a>
+                <a href="{{ route('contact') }}" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-black font-medium transition-colors">Kontak</a>
             </div>
         </div>
     </nav>
