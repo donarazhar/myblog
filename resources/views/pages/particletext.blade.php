@@ -187,19 +187,19 @@
     <canvas id="pw-canvas"></canvas>
 
     <!-- Back to Blog -->
-    <a href="{{ route('home') }}" class="back-btn">← Back to Blog</a>
+    <a href="{{ route('home') }}" class="back-btn">← Kembali ke Blog</a>
 
     <div id="pw-ui">
         <div id="pw-transcript"></div>
         <div id="pw-input-zone">
-            <input id="pw-input" type="text" placeholder="type a phrase here..." maxlength="100" />
+            <input id="pw-input" type="text" placeholder="ketik sebuah kata di sini..." maxlength="100" />
         </div>
-        <div id="pw-status">interactive sphere ready</div>
-        <div id="pw-tip">move cursor over word to repel &bull; double-click to reset</div>
+        <div id="pw-status">bola interaktif siap</div>
+        <div id="pw-tip">arahkan kursor ke kata untuk menolak &bull; klik ganda untuk mengulang</div>
     </div>
 
     <div id="pw-hint">
-        <span>double-click to reset</span>
+        <span>klik ganda untuk mengulang</span>
     </div>
 
     <script>
@@ -367,7 +367,7 @@
                 
                 appState = 1;
                 tipEl.style.opacity = '0';
-                statusEl.textContent = isInterim ? 'capturing...' : 'sentence active';
+                statusEl.textContent = isInterim ? 'memproses teks...' : 'kalimat aktif';
 
                 const pts = sampleTextPositions(phrase);
                 const pCount = pts.length / 2;
@@ -385,7 +385,7 @@
                 if (!isInterim) {
                     formTimeout = setTimeout(() => {
                         appState = 2;
-                        statusEl.textContent = 'move cursor to repel';
+                        statusEl.textContent = 'gerakkan kursor untuk menolak partikel';
                         tipEl.style.opacity = '1';
                     }, 2000);
                 }
@@ -511,7 +511,7 @@
             canvas.addEventListener('dblclick', () => {
                 appState = 0;
                 initSphereTargets();
-                statusEl.textContent = 'interactive sphere ready';
+                statusEl.textContent = 'bola interaktif siap';
                 tipEl.style.opacity = '0';
                 pwInput.value = '';
                 transcriptEl.textContent = '';
