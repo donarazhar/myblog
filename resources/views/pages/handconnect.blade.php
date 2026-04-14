@@ -210,8 +210,8 @@
     <!-- Start Overlay (Required for AudioContext initialization) -->
     <div id="startOverlay">
         <h1 style="margin-bottom: 20px; font-weight: 300; letter-spacing: 4px;">NEON AURA AR</h1>
-        <p style="margin-bottom: 40px; color: #888;">Grant camera permissions and click to start audio/visual experience</p>
-        <button class="start-btn" id="startBtn">Enter Experience</button>
+        <p style="margin-bottom: 40px; color: #888;">Berikan izin kamera dan klik untuk memulai pengalaman audio/visual</p>
+        <button class="start-btn" id="startBtn">Mulai</button>
     </div>
 
     <div class="video-container">
@@ -222,27 +222,27 @@
 
     <!-- Back to Blog -->
     <a href="{{ route('home') }}" class="back-btn hidden" id="backBtn">
-        ← Back to Blog
+        ← Kembali ke Blog
     </a>
 
     <!-- UI Overlay -->
     <div id="hud" class="hidden">
         <div class="panel">
-            <div class="stat">Hands Detected: <span class="val" id="ui-hands">0</span></div>
+            <div class="stat">Tangan Terdeteksi: <span class="val" id="ui-hands">0</span></div>
             <div class="stat">FPS: <span class="val" id="ui-fps">0</span></div>
         </div>
         <div class="panel">
-            <div class="stat">Gesture: <span class="val" id="ui-gesture">None</span></div>
-            <div class="stat">Spread: <span class="val" id="ui-spread">0%</span></div>
+            <div class="stat">Gestur: <span class="val" id="ui-gesture">Tidak Ada</span></div>
+            <div class="stat">Rentangan: <span class="val" id="ui-spread">0%</span></div>
         </div>
     </div>
 
     <div id="themes" class="hidden">
-        <button class="theme-btn active" data-theme="Rainbow">Rainbow</button>
+        <button class="theme-btn active" data-theme="Rainbow">Pelangi</button>
         <button class="theme-btn" data-theme="Cyberpunk">Cyberpunk</button>
         <button class="theme-btn" data-theme="Lava">Lava</button>
-        <button class="theme-btn" data-theme="Ocean">Ocean</button>
-        <button class="theme-btn" data-theme="Galaxy">Galaxy</button>
+        <button class="theme-btn" data-theme="Ocean">Samudra</button>
+        <button class="theme-btn" data-theme="Galaxy">Galaksi</button>
     </div>
 
 <script>
@@ -434,7 +434,7 @@ function detectGestures() {
             };
             createShockwave(mapToCanvas(midpoint), themes[currentTheme](time, 1, 1));
             triggerZap();
-            uiGesture.innerText = "PINCH !";
+            uiGesture.innerText = "MENCUBIT !";
         }
         lastPinchState[idx] = isPinching;
     });
@@ -446,7 +446,7 @@ function detectGestures() {
         let spreadPct = Math.min(Math.round(spread * 300), 100);
         uiSpread.innerText = spreadPct + '%';
         if (!lastPinchState.includes(true)) {
-            uiGesture.innerText = spreadPct > 50 ? "Open Hand" : "Fist";
+            uiGesture.innerText = spreadPct > 50 ? "Tangan Terbuka" : "Mengepal";
         }
     }
 }
