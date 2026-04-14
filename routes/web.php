@@ -30,6 +30,7 @@ Route::post('/contact', [HomeController::class, 'submitContact'])->name('contact
 // Animasi (Neon Aura AR)
 Route::get('/animasi', [HomeController::class, 'animasi'])->name('animasi');
 Route::get('/particletext', [HomeController::class, 'particletext'])->name('particletext');
+Route::get('/xrayvision', [HomeController::class, 'xrayvision'])->name('xrayvision');
 
 // Articles
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');

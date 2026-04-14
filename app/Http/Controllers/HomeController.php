@@ -32,6 +32,11 @@ class HomeController extends Controller
         return view('pages.particletext');
     }
 
+    public function xrayvision()
+    {
+        return view('pages.xrayvision');
+    }
+
     public function about()
     {
         $settings = Setting::getAllSettings();
