@@ -123,7 +123,7 @@
                             Animasi
                             <svg class="w-4 h-4 transition-transform duration-200" id="animasi-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-52 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden opacity-0 invisible translate-y-2 transition-all duration-200" id="animasi-menu">
+                        <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-52 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden" id="animasi-menu" style="display:none">
                             <div class="py-2">
                                 <a href="{{ route('handconnect') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
                                     <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white text-xs">🖐</span>
@@ -233,32 +233,31 @@
 
         function openAnimasiMenu() {
             animasiOpen = true;
-            animasiMenu.classList.remove('opacity-0', 'invisible', 'translate-y-2');
-            animasiMenu.classList.add('opacity-100', 'visible', 'translate-y-0');
-            animasiArrow.classList.add('rotate-180');
+            animasiMenu.style.display = 'block';
+            animasiArrow.style.transform = 'rotate(180deg)';
         }
 
         function closeAnimasiMenu() {
             animasiOpen = false;
-            animasiMenu.classList.add('opacity-0', 'invisible', 'translate-y-2');
-            animasiMenu.classList.remove('opacity-100', 'visible', 'translate-y-0');
-            animasiArrow.classList.remove('rotate-180');
+            animasiMenu.style.display = 'none';
+            animasiArrow.style.transform = '';
         }
 
-        animasiBtn.addEventListener('click', (e) => {
+        animasiBtn.addEventListener('click', function(e) {
+            e.preventDefault();
             e.stopPropagation();
             if (animasiOpen) { closeAnimasiMenu(); } else { openAnimasiMenu(); }
         });
 
         // Close when clicking anywhere outside
-        document.addEventListener('click', (e) => {
+        document.addEventListener('click', function(e) {
             if (animasiOpen && !animasiDropdown.contains(e.target)) {
                 closeAnimasiMenu();
             }
         });
 
         // Close on Escape key
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && animasiOpen) closeAnimasiMenu();
         });
 
