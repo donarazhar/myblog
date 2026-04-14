@@ -27,6 +27,9 @@ Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contact', [HomeController::class, 'submitContact'])->name('contact.submit');
 
+// Animasi (Neon Aura AR)
+Route::get('/animasi', [HomeController::class, 'animasi'])->name('animasi');
+
 // Articles
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
 Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');

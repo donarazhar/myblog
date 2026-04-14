@@ -22,6 +22,11 @@ class HomeController extends Controller
         return view('pages.home', compact('featuredArticles', 'settings'));
     }
 
+    public function animasi()
+    {
+        return view('pages.animasi');
+    }
+
     public function about()
     {
         $settings = Setting::getAllSettings();
