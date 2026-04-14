@@ -46,6 +46,11 @@ class HomeController extends Controller
     {
         return view('pages.threejsparticle');
     }
+
+    public function magicspells()
+    {
+        return view('pages.magicspells');
+    }
     public function about()
     {
         $settings = Setting::getAllSettings();

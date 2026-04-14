@@ -33,6 +33,7 @@ Route::get('/particletext', [HomeController::class, 'particletext'])->name('part
 Route::get('/xrayvision', [HomeController::class, 'xrayvision'])->name('xrayvision');
 Route::get('/airdrawer', [HomeController::class, 'airdrawer'])->name('airdrawer');
 Route::get('/threejsparticle', [HomeController::class, 'threejsparticle'])->name('threejsparticle');
+Route::get('/magicspells', [HomeController::class, 'magicspells'])->name('magicspells');
 
 // Articles
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
