@@ -57,6 +57,11 @@ class HomeController extends Controller
         return view('pages.soundvisualizer');
     }
 
+    public function solarsystem()
+    {
+        return view('pages.solarsystem');
+    }
+
     public function about()
     {
         $settings = Setting::getAllSettings();
