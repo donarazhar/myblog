@@ -37,6 +37,11 @@ class HomeController extends Controller
         return view('pages.xrayvision');
     }
 
+    public function airdrawer()
+    {
+        return view('pages.airdrawer');
+    }
+
     public function about()
     {
         $settings = Setting::getAllSettings();
