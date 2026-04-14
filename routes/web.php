@@ -32,6 +32,7 @@ Route::get('/handconnect', [HomeController::class, 'handconnect'])->name('handco
 Route::get('/particletext', [HomeController::class, 'particletext'])->name('particletext');
 Route::get('/xrayvision', [HomeController::class, 'xrayvision'])->name('xrayvision');
 Route::get('/airdrawer', [HomeController::class, 'airdrawer'])->name('airdrawer');
+Route::get('/threejsparticle', [HomeController::class, 'threejsparticle'])->name('threejsparticle');
 
 // Articles
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');

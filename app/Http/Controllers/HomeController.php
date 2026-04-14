@@ -42,6 +42,10 @@ class HomeController extends Controller
         return view('pages.airdrawer');
     }
 
+    public function threejsparticle()
+    {
+        return view('pages.threejsparticle');
+    }
     public function about()
     {
         $settings = Setting::getAllSettings();
