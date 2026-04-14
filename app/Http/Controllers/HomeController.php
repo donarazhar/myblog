@@ -51,6 +51,12 @@ class HomeController extends Controller
     {
         return view('pages.magicspells');
     }
+
+    public function soundvisualizer()
+    {
+        return view('pages.soundvisualizer');
+    }
+
     public function about()
     {
         $settings = Setting::getAllSettings();

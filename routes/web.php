@@ -34,6 +34,7 @@ Route::get('/xrayvision', [HomeController::class, 'xrayvision'])->name('xrayvisi
 Route::get('/airdrawer', [HomeController::class, 'airdrawer'])->name('airdrawer');
 Route::get('/threejsparticle', [HomeController::class, 'threejsparticle'])->name('threejsparticle');
 Route::get('/magicspells', [HomeController::class, 'magicspells'])->name('magicspells');
+Route::get('/soundvisualizer', [HomeController::class, 'soundvisualizer'])->name('soundvisualizer');
 
 // Articles
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');

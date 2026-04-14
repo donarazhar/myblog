@@ -119,7 +119,7 @@
 
                     <!-- Animasi Dropdown -->
                     <div class="relative" id="animasi-dropdown">
-                        <button type="button" class="flex items-center gap-1 text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('handconnect') || request()->routeIs('xrayvision') || request()->routeIs('particletext') || request()->routeIs('airdrawer') || request()->routeIs('threejsparticle') || request()->routeIs('magicspells') ? 'text-black' : '' }}" id="animasi-btn">
+                        <button type="button" class="flex items-center gap-1 text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('handconnect') || request()->routeIs('xrayvision') || request()->routeIs('particletext') || request()->routeIs('airdrawer') || request()->routeIs('threejsparticle') || request()->routeIs('magicspells') || request()->routeIs('soundvisualizer') ? 'text-black' : '' }}" id="animasi-btn">
                             Animasi
                             <svg class="w-4 h-4 transition-transform duration-200" id="animasi-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -148,6 +148,10 @@
                                 <a href="{{ route('magicspells') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
                                     <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center text-white text-xs">🔥</span>
                                     Lingkaran Sihir
+                                </a>
+                                <a href="{{ route('soundvisualizer') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
+                                    <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-violet-400 to-fuchsia-600 flex items-center justify-center text-white text-xs">🎵</span>
+                                    Visualisasi Suara
                                 </a>
                             </div>
                         </div>
@@ -196,6 +200,9 @@
                         </a>
                         <a href="{{ route('magicspells') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
                             <span>🔥</span> Lingkaran Sihir
+                        </a>
+                        <a href="{{ route('soundvisualizer') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
+                            <span>🎵</span> Visualisasi Suara
                         </a>
                     </div>
                 </div>
