@@ -127,23 +127,23 @@
                             <div class="py-2">
                                 <a href="{{ route('handconnect') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
                                     <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white text-xs">🖐</span>
-                                    Hand Connect
+                                    Aura Tangan
                                 </a>
                                 <a href="{{ route('xrayvision') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
                                     <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white text-xs">🔬</span>
-                                    Xray Vision
+                                    Pemindai X-Ray
                                 </a>
                                 <a href="{{ route('particletext') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
                                     <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white text-xs">✨</span>
-                                    Particle Text
+                                    Teks Partikel
                                 </a>
                                 <a href="{{ route('airdrawer') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
                                     <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-white text-xs">🎨</span>
-                                    Air Drawer
+                                    Kanvas Udara
                                 </a>
                                 <a href="{{ route('threejsparticle') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
                                     <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center text-white text-xs">🌀</span>
-                                    3JS Particle
+                                    Partikel 3D
                                 </a>
                             </div>
                         </div>
@@ -176,19 +176,19 @@
                     </button>
                     <div class="hidden pl-4 mt-1 space-y-1" id="mobile-animasi-menu">
                         <a href="{{ route('handconnect') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
-                            <span>🖐</span> Hand Connect
+                            <span>🖐</span> Aura Tangan
                         </a>
                         <a href="{{ route('xrayvision') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
-                            <span>🔬</span> Xray Vision
+                            <span>🔬</span> Pemindai X-Ray
                         </a>
                         <a href="{{ route('particletext') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
-                            <span>✨</span> Particle Text
+                            <span>✨</span> Teks Partikel
                         </a>
                         <a href="{{ route('airdrawer') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
-                            <span>🎨</span> Air Drawer
+                            <span>🎨</span> Kanvas Udara
                         </a>
                         <a href="{{ route('threejsparticle') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
-                            <span>🌀</span> 3JS Particle
+                            <span>🌀</span> Partikel 3D
                         </a>
                     </div>
                 </div>
