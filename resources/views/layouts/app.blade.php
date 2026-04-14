@@ -116,6 +116,35 @@
                     <a href="{{ route('home') }}" class="text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('home') ? 'text-black' : '' }}">Home</a>
                     <a href="{{ route('about') }}" class="text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('about') ? 'text-black' : '' }}">About</a>
                     <a href="{{ route('articles.index') }}" class="text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('articles.*') ? 'text-black' : '' }}">Articles</a>
+
+                    <!-- Animasi Dropdown -->
+                    <div class="relative" id="animasi-dropdown">
+                        <button type="button" class="flex items-center gap-1 text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('animasi') || request()->routeIs('xrayvision') || request()->routeIs('particletext') || request()->routeIs('airdrawer') ? 'text-black' : '' }}" id="animasi-btn">
+                            Animasi
+                            <svg class="w-4 h-4 transition-transform duration-200" id="animasi-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-52 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden opacity-0 invisible translate-y-2 transition-all duration-200" id="animasi-menu">
+                            <div class="py-2">
+                                <a href="{{ route('animasi') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
+                                    <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white text-xs">🖐</span>
+                                    Hand Connect
+                                </a>
+                                <a href="{{ route('xrayvision') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
+                                    <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white text-xs">🔬</span>
+                                    Xray Vision
+                                </a>
+                                <a href="{{ route('particletext') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
+                                    <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white text-xs">✨</span>
+                                    Particle Text
+                                </a>
+                                <a href="{{ route('airdrawer') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
+                                    <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-white text-xs">🎨</span>
+                                    Air Drawer
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                     <a href="{{ route('contact') }}" class="text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('contact') ? 'text-black' : '' }}">Contact</a>
                 </div>
 
@@ -134,6 +163,29 @@
                 <a href="{{ route('home') }}" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-black font-medium transition-colors">Home</a>
                 <a href="{{ route('about') }}" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-black font-medium transition-colors">About</a>
                 <a href="{{ route('articles.index') }}" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-black font-medium transition-colors">Articles</a>
+
+                <!-- Mobile Animasi Submenu -->
+                <div>
+                    <button type="button" class="flex items-center justify-between w-full px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-black font-medium transition-colors" id="mobile-animasi-btn">
+                        Animasi
+                        <svg class="w-4 h-4 transition-transform duration-200" id="mobile-animasi-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="hidden pl-4 mt-1 space-y-1" id="mobile-animasi-menu">
+                        <a href="{{ route('animasi') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
+                            <span>🖐</span> Hand Connect
+                        </a>
+                        <a href="{{ route('xrayvision') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
+                            <span>🔬</span> Xray Vision
+                        </a>
+                        <a href="{{ route('particletext') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
+                            <span>✨</span> Particle Text
+                        </a>
+                        <a href="{{ route('airdrawer') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
+                            <span>🎨</span> Air Drawer
+                        </a>
+                    </div>
+                </div>
+
                 <a href="{{ route('contact') }}" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-black font-medium transition-colors">Contact</a>
             </div>
         </div>
@@ -170,6 +222,36 @@
             } else {
                 navbar.classList.remove('shadow-lg');
             }
+        });
+
+        // Desktop Animasi Dropdown
+        const animasiDropdown = document.getElementById('animasi-dropdown');
+        const animasiMenu = document.getElementById('animasi-menu');
+        const animasiArrow = document.getElementById('animasi-arrow');
+        let dropdownTimeout;
+
+        animasiDropdown.addEventListener('mouseenter', () => {
+            clearTimeout(dropdownTimeout);
+            animasiMenu.classList.remove('opacity-0', 'invisible', 'translate-y-2');
+            animasiMenu.classList.add('opacity-100', 'visible', 'translate-y-0');
+            animasiArrow.classList.add('rotate-180');
+        });
+        animasiDropdown.addEventListener('mouseleave', () => {
+            dropdownTimeout = setTimeout(() => {
+                animasiMenu.classList.add('opacity-0', 'invisible', 'translate-y-2');
+                animasiMenu.classList.remove('opacity-100', 'visible', 'translate-y-0');
+                animasiArrow.classList.remove('rotate-180');
+            }, 150);
+        });
+
+        // Mobile Animasi Submenu
+        const mobileAnimasiBtn = document.getElementById('mobile-animasi-btn');
+        const mobileAnimasiMenu = document.getElementById('mobile-animasi-menu');
+        const mobileAnimasiArrow = document.getElementById('mobile-animasi-arrow');
+
+        mobileAnimasiBtn.addEventListener('click', () => {
+            mobileAnimasiMenu.classList.toggle('hidden');
+            mobileAnimasiArrow.classList.toggle('rotate-180');
         });
     </script>
 
