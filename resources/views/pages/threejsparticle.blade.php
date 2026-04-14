@@ -56,12 +56,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <a href="{{ route('home') }}" class="back-btn">← Back to Blog</a>
-    <div id="loading">Syncing Hand Data...</div>
+    <a href="{{ route('home') }}" class="back-btn">← Kembali ke Blog</a>
+    <div id="loading">Sinkronisasi Data Tangan...</div>
     <video id="videoElement" autoplay playsinline></video>
     <div id="ui">
-        <h1 id="shape-name">Shape: Sphere</h1>
-        <p>Pinch: Zoom | Hand: Repel | Fist: Switch Shape</p>
+        <h1 id="shape-name">Bentuk: Bola</h1>
+        <p>Cubit Jempol & Telunjuk: Zoom | Dekatkan Tangan: Tolak Partikel | Kepalkan: Ganti Bentuk</p>
     </div>
 
     <script>
@@ -124,7 +124,7 @@
 
         // --- 3. SHAPES ---
         const shapes = {
-            sphere: () => {
+            bola: () => {
                 for(let i = 0; i < particleCount; i++) {
                     const phi = Math.acos(-1 + (2 * i) / particleCount);
                     const theta = Math.sqrt(particleCount * Math.PI) * phi;
@@ -144,7 +144,7 @@
                     targetPositions[i*3+2] = r * Math.sin(angle);
                 }
             },
-            torus: () => {
+            donat: () => {
                 const majorR = 100;
                 const minorR = 40;
                 for(let i = 0; i < particleCount; i++) {
@@ -155,7 +155,7 @@
                     targetPositions[i*3+2] = minorR * Math.sin(v);
                 }
             },
-            heart: () => {
+            hati: () => {
                 for(let i = 0; i < particleCount; i++) {
                     const t = Math.random() * Math.PI * 2;
                     const x = 16 * Math.pow(Math.sin(t), 3);
@@ -178,11 +178,11 @@
             currentShapeIndex = (currentShapeIndex + 1) % shapeKeys.length;
             const name = shapeKeys[currentShapeIndex];
             shapes[name]();
-            document.getElementById('shape-name').innerText = "Shape: " + name.charAt(0).toUpperCase() + name.slice(1);
+            document.getElementById('shape-name').innerText = "Bentuk: " + name.charAt(0).toUpperCase() + name.slice(1);
         }
 
         let shapeInterval = setInterval(nextShape, 8000);
-        shapes.sphere();
+        shapes.bola();
 
         // --- 4. MEDIAPIPE HAND TRACKING ---
         const videoElement = document.getElementById('videoElement');
