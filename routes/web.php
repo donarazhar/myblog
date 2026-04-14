@@ -27,8 +27,8 @@ Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contact', [HomeController::class, 'submitContact'])->name('contact.submit');
 
-// Animasi (Neon Aura AR)
-Route::get('/animasi', [HomeController::class, 'animasi'])->name('animasi');
+// Animasi Pages
+Route::get('/handconnect', [HomeController::class, 'handconnect'])->name('handconnect');
 Route::get('/particletext', [HomeController::class, 'particletext'])->name('particletext');
 Route::get('/xrayvision', [HomeController::class, 'xrayvision'])->name('xrayvision');
 Route::get('/airdrawer', [HomeController::class, 'airdrawer'])->name('airdrawer');

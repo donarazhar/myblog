@@ -119,13 +119,13 @@
 
                     <!-- Animasi Dropdown -->
                     <div class="relative" id="animasi-dropdown">
-                        <button type="button" class="flex items-center gap-1 text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('animasi') || request()->routeIs('xrayvision') || request()->routeIs('particletext') || request()->routeIs('airdrawer') ? 'text-black' : '' }}" id="animasi-btn">
+                        <button type="button" class="flex items-center gap-1 text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('handconnect') || request()->routeIs('xrayvision') || request()->routeIs('particletext') || request()->routeIs('airdrawer') ? 'text-black' : '' }}" id="animasi-btn">
                             Animasi
                             <svg class="w-4 h-4 transition-transform duration-200" id="animasi-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-52 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden opacity-0 invisible translate-y-2 transition-all duration-200" id="animasi-menu">
                             <div class="py-2">
-                                <a href="{{ route('animasi') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
+                                <a href="{{ route('handconnect') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
                                     <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white text-xs">🖐</span>
                                     Hand Connect
                                 </a>
@@ -171,7 +171,7 @@
                         <svg class="w-4 h-4 transition-transform duration-200" id="mobile-animasi-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div class="hidden pl-4 mt-1 space-y-1" id="mobile-animasi-menu">
-                        <a href="{{ route('animasi') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
+                        <a href="{{ route('handconnect') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
                             <span>🖐</span> Hand Connect
                         </a>
                         <a href="{{ route('xrayvision') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">

@@ -22,9 +22,9 @@ class HomeController extends Controller
         return view('pages.home', compact('featuredArticles', 'settings'));
     }
 
-    public function animasi()
+    public function handconnect()
     {
-        return view('pages.animasi');
+        return view('pages.handconnect');
     }
 
     public function particletext()
