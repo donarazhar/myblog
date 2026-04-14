@@ -514,9 +514,15 @@
             _primaryGestureCandidate = raw;
             _primaryGestureCount = 1;
         }
-        // Only switch gesture after enough consecutive frames confirm it
-        // Exception: switching FROM DRAW to IDLE needs more frames (prevents accidental drops)
-        const threshold = (_lastPrimaryGesture === GESTURES.DRAW && raw === GESTURES.IDLE) ? 5 : PRIMARY_DEBOUNCE_FRAMES;
+        
+        // Dynamic debounce for realistic writing:
+        let threshold = PRIMARY_DEBOUNCE_FRAMES;
+        if (raw === GESTURES.DRAW && _lastPrimaryGesture === GESTURES.IDLE) {
+            threshold = 1; // Start drawing instantly so the first letter part isn't cut off
+        } else if (_lastPrimaryGesture === GESTURES.DRAW && raw === GESTURES.IDLE) {
+            threshold = 6; // Generous delay before stopping drawing to prevent accidental gaps in cursive
+        }
+
         if (_primaryGestureCount >= threshold) {
             _lastPrimaryGesture = raw;
         }
@@ -572,8 +578,8 @@
     // --- Position smoothing buffer (Exponential Moving Average) ---
     // Reduces hand-tracking jitter for much smoother drawing
     let smoothedX = null, smoothedY = null;
-    const EMA_ALPHA = 0.4; // Lower = smoother but more lag. 0.4 is a good balance.
-    const MIN_DRAW_DISTANCE = 3; // Minimum pixel distance to add a new point
+    const EMA_ALPHA = 0.65; // Higher = more responsive to writing curves, less lag.
+    const MIN_DRAW_DISTANCE = 2; // Lower = denser points for smoother cursive turns.
 
     function resize() { drawCanvas.width = window.innerWidth; drawCanvas.height = window.innerHeight; }
     resize(); window.addEventListener('resize', resize);
