@@ -27,6 +27,11 @@ class HomeController extends Controller
         return view('pages.animasi');
     }
 
+    public function particletext()
+    {
+        return view('pages.particletext');
+    }
+
     public function about()
     {
         $settings = Setting::getAllSettings();

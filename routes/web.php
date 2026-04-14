@@ -29,6 +29,7 @@ Route::post('/contact', [HomeController::class, 'submitContact'])->name('contact
 
 // Animasi (Neon Aura AR)
 Route::get('/animasi', [HomeController::class, 'animasi'])->name('animasi');
+Route::get('/particletext', [HomeController::class, 'particletext'])->name('particletext');
 
 // Articles
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
