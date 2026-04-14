@@ -224,24 +224,42 @@
             }
         });
 
-        // Desktop Animasi Dropdown
-        const animasiDropdown = document.getElementById('animasi-dropdown');
+        // Desktop Animasi Dropdown (click toggle + click outside to close)
+        const animasiBtn = document.getElementById('animasi-btn');
         const animasiMenu = document.getElementById('animasi-menu');
         const animasiArrow = document.getElementById('animasi-arrow');
-        let dropdownTimeout;
+        const animasiDropdown = document.getElementById('animasi-dropdown');
+        let animasiOpen = false;
 
-        animasiDropdown.addEventListener('mouseenter', () => {
-            clearTimeout(dropdownTimeout);
+        function openAnimasiMenu() {
+            animasiOpen = true;
             animasiMenu.classList.remove('opacity-0', 'invisible', 'translate-y-2');
             animasiMenu.classList.add('opacity-100', 'visible', 'translate-y-0');
             animasiArrow.classList.add('rotate-180');
+        }
+
+        function closeAnimasiMenu() {
+            animasiOpen = false;
+            animasiMenu.classList.add('opacity-0', 'invisible', 'translate-y-2');
+            animasiMenu.classList.remove('opacity-100', 'visible', 'translate-y-0');
+            animasiArrow.classList.remove('rotate-180');
+        }
+
+        animasiBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (animasiOpen) { closeAnimasiMenu(); } else { openAnimasiMenu(); }
         });
-        animasiDropdown.addEventListener('mouseleave', () => {
-            dropdownTimeout = setTimeout(() => {
-                animasiMenu.classList.add('opacity-0', 'invisible', 'translate-y-2');
-                animasiMenu.classList.remove('opacity-100', 'visible', 'translate-y-0');
-                animasiArrow.classList.remove('rotate-180');
-            }, 150);
+
+        // Close when clicking anywhere outside
+        document.addEventListener('click', (e) => {
+            if (animasiOpen && !animasiDropdown.contains(e.target)) {
+                closeAnimasiMenu();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && animasiOpen) closeAnimasiMenu();
         });
 
         // Mobile Animasi Submenu
