@@ -497,12 +497,36 @@
 
     function detectPrimaryRaw(lm) {
         if (!lm) return GESTURES.IDLE;
-        const d = Math.sqrt((lm[4].x-lm[8].x)**2 + (lm[4].y-lm[8].y)**2);
-        if (d < 0.05) return GESTURES.ERASE;
-        const idx = isFingerUp(lm,1), mid = isFingerUp(lm,2), ring = isFingerUp(lm,3), pinky = isFingerUp(lm,4), thumb = isFingerUp(lm,0);
-        if (!idx && !mid && !ring && !pinky && !thumb) return GESTURES.CLEAR;
+        
+        // Finger tip vs pip (more reliable than tip vs mcp for forward-pointing hands)
+        const idxTip = lm[8].y, idxPip = lm[6].y;
+        const midTip = lm[12].y, midPip = lm[10].y;
+        const ringTip = lm[16].y, ringPip = lm[14].y;
+        const pinkyTip = lm[20].y, pinkyPip = lm[18].y;
+        
+        const idx = idxTip < idxPip;
+        const mid = midTip < midPip;
+        const ring = ringTip < ringPip;
+        const pinky = pinkyTip < pinkyPip;
+
+        // Jarak ujung Jempol dan ujung Telunjuk (Pinch)
+        const pinchDist = Math.sqrt((lm[4].x - lm[8].x)**2 + (lm[4].y - lm[8].y)**2);
+
+        // CLEAR: Semua jari terangkat (Telapak tangan terbuka)
+        if (idx && mid && ring && pinky) return GESTURES.CLEAR;
+
+        // MOVE: Telunjuk & Tengah terangkat (Peace / V sign)
         if (idx && mid && !ring && !pinky) return GESTURES.MOVE;
+
+        // ERASE: Jempol & Tengah melakukan pinch (bukan jempol & telunjuk, untuk hindari salah deteksi saat nulis)
+        const eraseDist = Math.sqrt((lm[4].x - lm[12].x)**2 + (lm[4].y - lm[12].y)**2); 
+        if (eraseDist < 0.05 && idx) return GESTURES.ERASE;
+
+        // DRAW: Telunjuk terangkat. 
+        // Kunci kalimat bersambung: Jangan gugurkan status DRAW hanya karena jempol bergerak merapat.
+        // Asalkan jari tengah, manis, kelingking tertutup, it stays DRAW.
         if (idx && !mid && !ring && !pinky) return GESTURES.DRAW;
+
         return GESTURES.IDLE;
     }
 
