@@ -72,6 +72,11 @@ class HomeController extends Controller
         return view('pages.handpen');
     }
 
+    public function narutohands()
+    {
+        return view('pages.narutohands');
+    }
+
     public function about()
     {
         $settings = Setting::getAllSettings();

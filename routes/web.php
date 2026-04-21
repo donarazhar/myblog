@@ -38,6 +38,7 @@ Route::get('/soundvisualizer', [HomeController::class, 'soundvisualizer'])->name
 Route::get('/solarsystem', [HomeController::class, 'solarsystem'])->name('solarsystem');
 Route::get('/fireengine', [HomeController::class, 'fireengine'])->name('fireengine');
 Route::get('/handpen', [HomeController::class, 'handpen'])->name('handpen');
+Route::get('/narutohands', [HomeController::class, 'narutohands'])->name('narutohands');
 
 // Articles
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');

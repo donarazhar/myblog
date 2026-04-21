@@ -119,7 +119,7 @@
 
                     <!-- Animasi Dropdown -->
                     <div class="relative" id="animasi-dropdown">
-                        <button type="button" class="flex items-center gap-1 text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('handconnect') || request()->routeIs('xrayvision') || request()->routeIs('particletext') || request()->routeIs('airdrawer') || request()->routeIs('threejsparticle') || request()->routeIs('magicspells') || request()->routeIs('soundvisualizer') || request()->routeIs('solarsystem') || request()->routeIs('fireengine') || request()->routeIs('handpen') ? 'text-black' : '' }}" id="animasi-btn">
+                        <button type="button" class="flex items-center gap-1 text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('handconnect') || request()->routeIs('xrayvision') || request()->routeIs('particletext') || request()->routeIs('airdrawer') || request()->routeIs('threejsparticle') || request()->routeIs('magicspells') || request()->routeIs('soundvisualizer') || request()->routeIs('solarsystem') || request()->routeIs('fireengine') || request()->routeIs('handpen') || request()->routeIs('narutohands') ? 'text-black' : '' }}" id="animasi-btn">
                             Animasi
                             <svg class="w-4 h-4 transition-transform duration-200" id="animasi-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -164,6 +164,10 @@
                                 <a href="{{ route('handpen') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
                                     <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-white text-xs">✍️</span>
                                     Pena Tangan
+                                </a>
+                                <a href="{{ route('narutohands') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
+                                    <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-orange-500 to-blue-600 flex items-center justify-center text-white text-xs">🥷</span>
+                                    Jutsu Tangan
                                 </a>
 
                             </div>
@@ -225,6 +229,9 @@
                         </a>
                         <a href="{{ route('handpen') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
                             <span>✍️</span> Pena Tangan
+                        </a>
+                        <a href="{{ route('narutohands') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
+                            <span>🥷</span> Jutsu Tangan
                         </a>
 
                     </div>
