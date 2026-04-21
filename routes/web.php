@@ -36,6 +36,8 @@ Route::get('/threejsparticle', [HomeController::class, 'threejsparticle'])->name
 Route::get('/magicspells', [HomeController::class, 'magicspells'])->name('magicspells');
 Route::get('/soundvisualizer', [HomeController::class, 'soundvisualizer'])->name('soundvisualizer');
 Route::get('/solarsystem', [HomeController::class, 'solarsystem'])->name('solarsystem');
+Route::get('/fireengine', [HomeController::class, 'fireengine'])->name('fireengine');
+Route::get('/handpen', [HomeController::class, 'handpen'])->name('handpen');
 
 // Articles
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');

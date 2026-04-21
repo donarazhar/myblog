@@ -62,6 +62,16 @@ class HomeController extends Controller
         return view('pages.solarsystem');
     }
 
+    public function fireengine()
+    {
+        return view('pages.fireengine');
+    }
+
+    public function handpen()
+    {
+        return view('pages.handpen');
+    }
+
     public function about()
     {
         $settings = Setting::getAllSettings();
