@@ -98,6 +98,52 @@
             background: rgba(0, 255, 204, 0.2);
             text-shadow: 0 0 8px #00ffcc;
         }
+
+        /* Start Overlay */
+        #startOverlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        #startOverlay h1 {
+            color: #00ffcc;
+            font-size: 24px;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px #00ffcc;
+        }
+        #startOverlay p {
+            color: #0088ff;
+            font-size: 13px;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            max-width: 400px;
+            text-align: center;
+            line-height: 1.5;
+        }
+        .start-btn {
+            background: transparent;
+            border: 1px solid #00ffcc;
+            color: #00ffcc;
+            padding: 12px 30px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            letter-spacing: 3px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .start-btn:hover {
+            background: rgba(0, 255, 204, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+        }
+        .hidden { opacity: 0; pointer-events: none; }
     </style>
 </head>
 
@@ -108,7 +154,14 @@
         <div id="status">MEMULAI...</div>
         <div id="frame-counter">FRM: 0000</div>
         <a href="{{ route('home') }}" class="back-btn">← KEMBALI KE BLOG</a>
-        <div id="loader">MEMUAT MESIN NEURAL GANDA...<br><span style="font-size:12px;color:#0088ff">Modul Tangan & Postur</span></div>
+        <div id="loader" class="hidden">MEMUAT MESIN NEURAL GANDA...<br><span style="font-size:12px;color:#0088ff">Modul Tangan & Postur</span></div>
+        
+        <!-- Start Overlay -->
+        <div id="startOverlay">
+            <h1>X-RAY VISION</h1>
+            <p>Sistem Pemindaian Neural.<br>Izinkan akses kamera dan klik Mulai.</p>
+            <button class="start-btn" id="startBtn">SISTEM.MULAI()</button>
+        </div>
     </div>
 
     <!-- MediaPipe Holistic -->
@@ -122,6 +175,8 @@
         const statusEl = document.getElementById('status');
         const frameEl = document.getElementById('frame-counter');
         const loaderEl = document.getElementById('loader');
+        const startOverlay = document.getElementById('startOverlay');
+        const startBtn = document.getElementById('startBtn');
 
         let W = 0, H = 0;
         let frame = 0;
@@ -964,7 +1019,12 @@
                 loaderEl.innerHTML = "GAGAL MEMULAI MESIN NEURAL";
             }
         }
-        startEngines();
+        
+        startBtn.addEventListener('click', () => {
+            startOverlay.classList.add('hidden');
+            loaderEl.classList.remove('hidden');
+            startEngines();
+        });
     </script>
 </body>
 
