@@ -1,6 +1,6 @@
 // WordCatcher Vocabulary Database
 // Categories: noun, verb, adjective, body, food, color, nature, place
-const vocabBank = {
+var vocabBank = {
   1: [
     // Animals
     {emoji:'🐱',id:'Kucing',en:'CAT',cat:'noun'},{emoji:'🐕',id:'Anjing',en:'DOG',cat:'noun'},
@@ -166,7 +166,7 @@ const vocabBank = {
 };
 
 // Category labels in Indonesian
-const catLabels = {
+var catLabels = {
   noun: '📦 Kata Benda', verb: '🏃 Kata Kerja', adj: '🎨 Kata Sifat',
   color: '🎨 Warna', body: '🦴 Tubuh', food: '🍽️ Makanan',
   nature: '🌿 Alam', place: '📍 Tempat'

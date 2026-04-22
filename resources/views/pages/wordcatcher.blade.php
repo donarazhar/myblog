@@ -340,8 +340,8 @@
     </a>
 
     <!-- Load vocab data then game logic -->
-    <script src="{{ asset('js/vocab-data.js') }}"></script>
-    <script src="{{ asset('js/wordcatcher.js') }}"></script>
+    <script src="{{ asset('js/vocab-data.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('js/wordcatcher.js') }}?v={{ time() }}"></script>
 
 </body>
 </html>
