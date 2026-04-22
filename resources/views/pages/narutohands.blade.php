@@ -624,8 +624,8 @@
 
             const cam = new Camera(vElement, {
                 onFrame: async () => { await h.send({ image: vElement }); },
-                width: 1280,
-                height: 720
+                width: 640,
+                height: 480
             });
             cam.start();
         }

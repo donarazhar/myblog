@@ -545,12 +545,12 @@ const camera = new Camera(videoElement, {
     onFrame: async () => {
         await hands.send({image: videoElement});
     },
-    width: 1280,
-    height: 720
+    width: 640,
+    height: 480
 });
 
 // UI Event Listeners
-document.getElementById('startBtn').addEventListener('click', async () => {
+document.getElementById('startBtn').addEventListener('click', () => {
     initAudio();
     document.getElementById('startOverlay').classList.add('hidden');
     document.getElementById('hud').classList.remove('hidden');

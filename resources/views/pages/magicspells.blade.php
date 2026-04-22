@@ -343,8 +343,8 @@
             onFrame: async () => {
                 await hands.send({image: videoElement});
             },
-            width: 1280,
-            height: 720,
+            width: 640,
+            height: 480,
             facingMode: 'user'
         });
         

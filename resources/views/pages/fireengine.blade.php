@@ -323,7 +323,7 @@
         <div class="loading-text">Memuat Model...</div>
     </div>
 
-    <video id="input_video"></video>
+    <video id="input_video" autoplay playsinline></video>
     <canvas id="output_canvas"></canvas>
 
     <!-- Back Button -->
@@ -828,35 +828,29 @@
         }
 
         // ── MediaPipe Initialization ──
-        async function initApp() {
-            loadingUI.style.display = 'block';
+        const hands = new Hands({
+            locateFile: (file) => {
+                return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+            }
+        });
 
-            const hands = new Hands({
-                locateFile: (file) => {
-                    return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
-                }
-            });
+        hands.setOptions({
+            maxNumHands: 2,
+            modelComplexity: 1,
+            minDetectionConfidence: 0.65,
+            minTrackingConfidence: 0.65
+        });
 
-            hands.setOptions({
-                maxNumHands: 2,
-                modelComplexity: 1,
-                minDetectionConfidence: 0.65,
-                minTrackingConfidence: 0.65
-            });
+        hands.onResults(onResults);
 
-            hands.onResults(onResults);
-
-            const camera = new Camera(videoElement, {
-                onFrame: async () => {
-                    await hands.send({ image: videoElement });
-                },
-                width: 1280,
-                height: 720
-            camera.start();
-        }
-
-        // Initialize camera on page load to trigger permission prompt
-        initApp();
+        const camera = new Camera(videoElement, {
+            onFrame: async () => {
+                await hands.send({ image: videoElement });
+            },
+            width: 640,
+            height: 480
+        });
+        camera.start();
 
         // ── Start Button ──
         startBtn.addEventListener('click', () => {

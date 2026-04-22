@@ -379,7 +379,7 @@
         <div class="loading-text">Memuat Model...</div>
     </div>
 
-    <video id="vid"></video>
+    <video id="vid" autoplay playsinline></video>
     <canvas id="c"></canvas>
 
     <!-- Back Button -->
@@ -609,8 +609,8 @@
 
             const cam = new Camera(vid, {
                 onFrame: async () => { await h.send({ image: vid }); },
-                width: 1280,
-                height: 720
+                width: 640,
+                height: 480
             });
 
             cam.start();

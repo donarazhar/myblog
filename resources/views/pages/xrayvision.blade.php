@@ -986,23 +986,13 @@
                     currentMask = res.segmentationMask;
                 });
 
-                try {
-                    // Force permission prompt, but immediately close stream so MediaPipe can access the hardware without NotReadableError
-                    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                    stream.getTracks().forEach(track => track.stop());
-                } catch (e) {
-                    console.error("Camera error:", e);
-                    loaderEl.innerHTML = `ERROR KAMERA: ${e.name}`;
-                    return;
-                }
-
                 loaderEl.style.display = 'none';
                 statusEl.textContent = 'SISTEM SIAP';
 
                 const camera = new Camera(vid, {
                     onFrame: async () => { await holistic.send({ image: vid }); },
-                    width: 1280,
-                    height: 720
+                    width: 640,
+                    height: 480
                 });
                 camera.start();
             } catch (err) {

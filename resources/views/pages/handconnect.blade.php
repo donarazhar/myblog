@@ -325,6 +325,7 @@ document.querySelectorAll('.theme-btn').forEach(btn => {
 });
 
 // Start button triggers AudioContext and hides overlay
+document.getElementById('startBtn').addEventListener('click', () => {
     document.getElementById('startOverlay').classList.add('hidden');
     document.getElementById('hud').classList.remove('hidden');
     document.getElementById('themes').classList.remove('hidden');
@@ -703,7 +704,7 @@ function renderLoop(timestamp) {
 /**
  * MEDIAPIPE INITIALIZATION
  */
-async function initMediaPipe() {
+function initMediaPipe() {
     const hands = new Hands({locateFile: (file) => {
         return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
     }});
@@ -743,12 +744,12 @@ async function initMediaPipe() {
         onFrame: async () => {
             await hands.send({image: videoElement});
         },
-        width: 1280,
-        height: 720,
+        width: 640,
+        height: 480
+    });
     camera.start();
 }
 
-// Start camera immediately on page load to trigger permission prompt
 initMediaPipe();
 
 </script>

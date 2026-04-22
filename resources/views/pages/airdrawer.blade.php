@@ -860,19 +860,16 @@
     // ============================================================
     async function start() {
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: 'user' } });
-            webcam.srcObject = stream;
-            await webcam.play();
-
             const hands = new Hands({ locateFile: f => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${f}` });
             hands.setOptions({ maxNumHands: 2, modelComplexity: 1, minDetectionConfidence: 0.5, minTrackingConfidence: 0.5 });
             hands.onResults(onResults);
 
-            const processFrame = async () => {
-                if (webcam.readyState === 4) await hands.send({ image: webcam });
-                requestAnimationFrame(processFrame);
-            };
-            processFrame();
+            const cam = new Camera(webcam, {
+                onFrame: async () => { await hands.send({ image: webcam }); },
+                width: 640,
+                height: 480
+            });
+            cam.start();
         } catch (err) { console.error('Camera error:', err); }
     }
 
