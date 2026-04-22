@@ -568,7 +568,8 @@ document.getElementById('startBtn').addEventListener('click', async () => {
 
     // Request camera permission explicitly first to force the browser prompt
     try {
-        await navigator.mediaDevices.getUserMedia({ video: true });
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        stream.getTracks().forEach(track => track.stop()); // Stop immediately to free hardware for MediaPipe
         camera.start();
     } catch (error) {
         console.error("Camera permission denied or error:", error);

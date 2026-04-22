@@ -986,25 +986,16 @@
                     currentMask = res.segmentationMask;
                 });
 
-                let stream;
-                const constraints = {
-                    video: {
-                        facingMode: 'user',
-                        width: { ideal: 1280, max: 1920 },
-                        height: { ideal: 720, max: 1080 }
-                    }
-                };
-
                 try {
-                    stream = await navigator.mediaDevices.getUserMedia(constraints);
+                    // Force permission prompt, but immediately close stream so MediaPipe can access the hardware without NotReadableError
+                    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                    stream.getTracks().forEach(track => track.stop());
                 } catch (e) {
                     console.error("Camera error:", e);
                     loaderEl.innerHTML = `ERROR KAMERA: ${e.name}`;
                     return;
                 }
 
-                vid.srcObject = stream;
-                await vid.play();
                 loaderEl.style.display = 'none';
                 statusEl.textContent = 'SISTEM SIAP';
 
