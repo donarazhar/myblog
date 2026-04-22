@@ -40,6 +40,9 @@ Route::get('/fireengine', [HomeController::class, 'fireengine'])->name('fireengi
 Route::get('/handpen', [HomeController::class, 'handpen'])->name('handpen');
 Route::get('/narutohands', [HomeController::class, 'narutohands'])->name('narutohands');
 
+// Belajar Pages
+Route::get('/animath', [HomeController::class, 'animath'])->name('animath');
+
 // Articles
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
 Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');

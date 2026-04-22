@@ -174,6 +174,30 @@
                         </div>
                     </div>
 
+                    <!-- Belajar Dropdown -->
+                    <div class="relative" id="belajar-dropdown">
+                        <button type="button" class="flex items-center gap-1 text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('animath') ? 'text-black' : '' }}" id="belajar-btn">
+                            Belajar
+                            <svg class="w-4 h-4 transition-transform duration-200" id="belajar-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden" id="belajar-menu" style="display:none; white-space:nowrap; min-width:200px;">
+                            <div class="py-2">
+                                <a href="{{ route('animath') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
+                                    <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-violet-500 to-fuchsia-600 flex items-center justify-center text-white text-xs">🧮</span>
+                                    Animath (Matematika)
+                                </a>
+                                <span class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 cursor-not-allowed" title="Segera Hadir">
+                                    <span class="w-6 h-6 rounded-lg bg-gray-200 flex items-center justify-center text-gray-400 text-xs">🇬🇧</span>
+                                    English <span class="ml-auto text-xs bg-gray-100 text-gray-400 px-2 py-0.5 rounded-full">Soon</span>
+                                </span>
+                                <span class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 cursor-not-allowed" title="Segera Hadir">
+                                    <span class="w-6 h-6 rounded-lg bg-gray-200 flex items-center justify-center text-gray-400 text-xs">🔬</span>
+                                    Sains <span class="ml-auto text-xs bg-gray-100 text-gray-400 px-2 py-0.5 rounded-full">Soon</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
                     <a href="{{ route('contact') }}" class="text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('contact') ? 'text-black' : '' }}">Kontak</a>
                 </div>
 
@@ -234,6 +258,25 @@
                             <span>🥷</span> Jutsu Tangan
                         </a>
 
+                    </div>
+                </div>
+
+                <!-- Mobile Belajar Submenu -->
+                <div>
+                    <button type="button" class="flex items-center justify-between w-full px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-black font-medium transition-colors" id="mobile-belajar-btn">
+                        Belajar
+                        <svg class="w-4 h-4 transition-transform duration-200" id="mobile-belajar-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="hidden pl-4 mt-1 space-y-1" id="mobile-belajar-menu">
+                        <a href="{{ route('animath') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
+                            <span>🧮</span> Animath (Matematika)
+                        </a>
+                        <span class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-300 cursor-not-allowed">
+                            <span>🇬🇧</span> English <span class="ml-auto text-xs bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded-full">Soon</span>
+                        </span>
+                        <span class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-300 cursor-not-allowed">
+                            <span>🔬</span> Sains <span class="ml-auto text-xs bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded-full">Soon</span>
+                        </span>
                     </div>
                 </div>
 
@@ -320,6 +363,53 @@
         mobileAnimasiBtn.addEventListener('click', () => {
             mobileAnimasiMenu.classList.toggle('hidden');
             mobileAnimasiArrow.classList.toggle('rotate-180');
+        });
+
+        // Desktop Belajar Dropdown (click toggle + click outside to close)
+        const belajarBtn = document.getElementById('belajar-btn');
+        const belajarMenu = document.getElementById('belajar-menu');
+        const belajarArrow = document.getElementById('belajar-arrow');
+        const belajarDropdown = document.getElementById('belajar-dropdown');
+        let belajarOpen = false;
+
+        function openBelajarMenu() {
+            belajarOpen = true;
+            belajarMenu.style.display = 'block';
+            belajarArrow.style.transform = 'rotate(180deg)';
+            // Close Animasi if open
+            if (animasiOpen) closeAnimasiMenu();
+        }
+
+        function closeBelajarMenu() {
+            belajarOpen = false;
+            belajarMenu.style.display = 'none';
+            belajarArrow.style.transform = '';
+        }
+
+        belajarBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (belajarOpen) { closeBelajarMenu(); } else { openBelajarMenu(); }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (belajarOpen && !belajarDropdown.contains(e.target)) {
+                closeBelajarMenu();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && belajarOpen) closeBelajarMenu();
+        });
+
+        // Mobile Belajar Submenu
+        const mobileBelajarBtn = document.getElementById('mobile-belajar-btn');
+        const mobileBelajarMenu = document.getElementById('mobile-belajar-menu');
+        const mobileBelajarArrow = document.getElementById('mobile-belajar-arrow');
+
+        mobileBelajarBtn.addEventListener('click', () => {
+            mobileBelajarMenu.classList.toggle('hidden');
+            mobileBelajarArrow.classList.toggle('rotate-180');
         });
     </script>
 
