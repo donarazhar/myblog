@@ -186,10 +186,10 @@
                                     <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-violet-500 to-fuchsia-600 flex items-center justify-center text-white text-xs">🧮</span>
                                     Animath (Matematika)
                                 </a>
-                                <span class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 cursor-not-allowed" title="Segera Hadir">
-                                    <span class="w-6 h-6 rounded-lg bg-gray-200 flex items-center justify-center text-gray-400 text-xs">🇬🇧</span>
-                                    English <span class="ml-auto text-xs bg-gray-100 text-gray-400 px-2 py-0.5 rounded-full">Soon</span>
-                                </span>
+                                <a href="{{ route('wordcatcher') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
+                                    <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-xs">🔤</span>
+                                    WordCatcher (English)
+                                </a>
                                 <span class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 cursor-not-allowed" title="Segera Hadir">
                                     <span class="w-6 h-6 rounded-lg bg-gray-200 flex items-center justify-center text-gray-400 text-xs">🔬</span>
                                     Sains <span class="ml-auto text-xs bg-gray-100 text-gray-400 px-2 py-0.5 rounded-full">Soon</span>
@@ -271,9 +271,9 @@
                         <a href="{{ route('animath') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
                             <span>🧮</span> Animath (Matematika)
                         </a>
-                        <span class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-300 cursor-not-allowed">
-                            <span>🇬🇧</span> English <span class="ml-auto text-xs bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded-full">Soon</span>
-                        </span>
+                        <a href="{{ route('wordcatcher') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
+                            <span>🔤</span> WordCatcher (English)
+                        </a>
                         <span class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-300 cursor-not-allowed">
                             <span>🔬</span> Sains <span class="ml-auto text-xs bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded-full">Soon</span>
                         </span>

@@ -82,6 +82,11 @@ class HomeController extends Controller
         return view('pages.animath');
     }
 
+    public function wordcatcher()
+    {
+        return view('pages.wordcatcher');
+    }
+
     public function about()
     {
         $settings = Setting::getAllSettings();
