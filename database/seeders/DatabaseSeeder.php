@@ -94,6 +94,7 @@ class DatabaseSeeder extends Seeder
             PerformanceTestingArticleSeeder::class,
             TechnologicalDeterminismArticleSeeder::class,
             PhishingArticleSeeder::class,
+            InternetCepatArticleSeeder::class,
         ]);
     }
 }
