@@ -127,9 +127,21 @@
             font-size: 1.2rem;
             color: #8ecaee;
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
             letter-spacing: 1px;
             text-transform: uppercase;
+        }
+
+        .card-category {
+            font-size: 0.75rem;
+            color: rgba(255, 183, 3, 0.8);
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+            padding: 2px 12px;
+            background: rgba(255, 183, 3, 0.1);
+            border: 1px solid rgba(255, 183, 3, 0.2);
+            border-radius: 20px;
         }
 
         .spelling-box {
@@ -317,6 +329,7 @@
     <div id="magic-card" class="hidden">
         <div class="card-emoji" id="card-emoji">🍎</div>
         <div class="card-translation" id="card-translation">Apel</div>
+        <div class="card-category" id="card-category"></div>
         <div class="spelling-box" id="spelling-box">
             <!-- Slots injected via JS -->
         </div>
@@ -326,7 +339,8 @@
         ← Kembali
     </a>
 
-    <!-- Load the JS logic -->
+    <!-- Load vocab data then game logic -->
+    <script src="{{ asset('js/vocab-data.js') }}"></script>
     <script src="{{ asset('js/wordcatcher.js') }}"></script>
 
 </body>

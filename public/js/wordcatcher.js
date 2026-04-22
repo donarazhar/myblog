@@ -14,33 +14,10 @@ window.addEventListener('resize', () => {
     canvasElement.height = height;
 });
 
-// Vocab Bank
-const vocabBank = {
-    1: [
-        { emoji: '🐱', id: 'Kucing', en: 'CAT' },
-        { emoji: '🐕', id: 'Anjing', en: 'DOG' },
-        { emoji: '☀️', id: 'Matahari', en: 'SUN' },
-        { emoji: '🐟', id: 'Ikan', en: 'FISH' },
-        { emoji: '🐦', id: 'Burung', en: 'BIRD' },
-        { emoji: '🌙', id: 'Bulan', en: 'MOON' }
-    ],
-    2: [
-        { emoji: '🍎', id: 'Apel', en: 'APPLE' },
-        { emoji: '🐴', id: 'Kuda', en: 'HORSE' },
-        { emoji: '💧', id: 'Air', en: 'WATER' },
-        { emoji: '🪑', id: 'Kursi', en: 'CHAIR' },
-        { emoji: '📚', id: 'Buku', en: 'BOOKS' },
-        { emoji: '🏠', id: 'Rumah', en: 'HOUSE' }
-    ],
-    3: [
-        { emoji: '🌺', id: 'Bunga', en: 'FLOWER' },
-        { emoji: '🏫', id: 'Sekolah', en: 'SCHOOL' },
-        { emoji: '🪟', id: 'Jendela', en: 'WINDOW' },
-        { emoji: '🍊', id: 'Jeruk', en: 'ORANGE' },
-        { emoji: '✏️', id: 'Pensil', en: 'PENCIL' },
-        { emoji: '🌈', id: 'Pelangi', en: 'RAINBOW' }
-    ]
-};
+// vocabBank & catLabels loaded from vocab-data.js
+
+// Track last word to avoid repeats
+let lastWordEn = '';
 
 // Audio Context
 let audioCtx;
@@ -188,7 +165,14 @@ const spawnBubble = () => {
 
 const setupWord = () => {
     const list = vocabBank[gameState.level];
-    gameState.currentWord = list[Math.floor(Math.random() * list.length)];
+    // Pick a random word, but avoid repeating the last one
+    let pick;
+    do {
+        pick = list[Math.floor(Math.random() * list.length)];
+    } while (pick.en === lastWordEn && list.length > 1);
+    lastWordEn = pick.en;
+
+    gameState.currentWord = pick;
     gameState.targetWord = gameState.currentWord.en;
     gameState.spelledWord = '_'.repeat(gameState.targetWord.length);
     gameState.bubbles = [];
@@ -197,6 +181,11 @@ const setupWord = () => {
     // Setup UI
     document.getElementById('card-emoji').innerText = gameState.currentWord.emoji;
     document.getElementById('card-translation').innerText = gameState.currentWord.id;
+    const catEl = document.getElementById('card-category');
+    if (catEl && gameState.currentWord.cat && catLabels) {
+        catEl.innerText = catLabels[gameState.currentWord.cat] || '';
+        catEl.style.display = 'block';
+    }
     
     const spellingBox = document.getElementById('spelling-box');
     spellingBox.innerHTML = '';
