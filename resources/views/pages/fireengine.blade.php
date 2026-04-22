@@ -828,7 +828,7 @@
         }
 
         // ── MediaPipe Initialization ──
-        function initApp() {
+        async function initApp() {
             loadingUI.style.display = 'block';
 
             const hands = new Hands({
@@ -853,7 +853,15 @@
                 width: 1280,
                 height: 720
             });
-            camera.start();
+            // Request explicit camera permission first
+            try {
+                await navigator.mediaDevices.getUserMedia({ video: true });
+                camera.start();
+            } catch (error) {
+                console.error("Camera permission denied:", error);
+                alert("Mohon izinkan akses kamera untuk melanjutkan.");
+                loadingUI.style.display = 'none';
+            }
         }
 
         // ── Start Button ──

@@ -506,7 +506,7 @@ const camera = new Camera(videoElement, {
 });
 
 // UI Event Listeners
-document.getElementById('startBtn').addEventListener('click', () => {
+document.getElementById('startBtn').addEventListener('click', async () => {
     initAudio();
     document.getElementById('startOverlay').classList.add('hidden');
     document.getElementById('hud').classList.remove('hidden');
@@ -520,5 +520,12 @@ document.getElementById('startBtn').addEventListener('click', () => {
     document.getElementById('ui-score').innerText = gameState.score;
     
     generateQuestion();
-    camera.start();
+    // Request explicit camera permission first
+    try {
+        await navigator.mediaDevices.getUserMedia({ video: true });
+        camera.start();
+    } catch (error) {
+        console.error("Camera permission denied:", error);
+        alert("Mohon izinkan akses kamera untuk bermain.");
+    }
 });

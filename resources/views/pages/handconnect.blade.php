@@ -705,7 +705,7 @@ function renderLoop(timestamp) {
 /**
  * MEDIAPIPE INITIALIZATION
  */
-function initMediaPipe() {
+async function initMediaPipe() {
     const hands = new Hands({locateFile: (file) => {
         return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
     }});
@@ -750,7 +750,14 @@ function initMediaPipe() {
         facingMode: 'user'
     });
     
-    camera.start();
+    // Request explicit camera permission first
+    try {
+        await navigator.mediaDevices.getUserMedia({ video: true });
+        camera.start();
+    } catch (error) {
+        console.error("Camera permission denied:", error);
+        alert("Mohon izinkan akses kamera untuk melanjutkan.");
+    }
 }
 
 </script>
