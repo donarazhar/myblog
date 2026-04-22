@@ -520,13 +520,7 @@ document.getElementById('startBtn').addEventListener('click', async () => {
     document.getElementById('ui-score').innerText = gameState.score;
     
     generateQuestion();
-    // Request explicit camera permission first
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        stream.getTracks().forEach(track => track.stop()); // Stop immediately to free hardware for MediaPipe
-        camera.start();
-    } catch (error) {
-        console.error("Camera permission denied:", error);
-        alert("Mohon izinkan akses kamera untuk bermain.");
-    }
 });
+
+// Start camera immediately on page load to trigger permission prompt (matches Particle 3D behavior)
+camera.start();

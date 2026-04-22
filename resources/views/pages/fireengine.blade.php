@@ -852,24 +852,16 @@
                 },
                 width: 1280,
                 height: 720
-            });
-            // Request explicit camera permission first
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                stream.getTracks().forEach(track => track.stop()); // Stop immediately to free hardware for MediaPipe
-                camera.start();
-            } catch (error) {
-                console.error("Camera permission denied:", error);
-                alert("Mohon izinkan akses kamera untuk melanjutkan.");
-                loadingUI.style.display = 'none';
-            }
+            camera.start();
         }
+
+        // Initialize camera on page load to trigger permission prompt
+        initApp();
 
         // ── Start Button ──
         startBtn.addEventListener('click', () => {
             startOverlay.classList.add('hidden');
             isStarted = true;
-            initApp();
         });
     </script>
 </body>

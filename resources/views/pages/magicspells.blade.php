@@ -348,16 +348,11 @@
             facingMode: 'user'
         });
         
-        // Request explicit camera permission first
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            stream.getTracks().forEach(track => track.stop()); // Stop immediately to free hardware for MediaPipe
-            camera.start();
-        } catch (error) {
-            console.error("Camera permission denied:", error);
-            alert("Mohon izinkan akses kamera untuk melanjutkan.");
-        }
-        renderLoop();
+        camera.start();
+        
+        // Start camera immediately on page load to trigger permission prompt
+        // Wait, renderLoop depends on video starting, MediaPipe onFrame will trigger it
+        requestAnimationFrame(renderLoop);
     </script>
 </body>
 </html>

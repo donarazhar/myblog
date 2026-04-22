@@ -325,13 +325,11 @@ document.querySelectorAll('.theme-btn').forEach(btn => {
 });
 
 // Start button triggers AudioContext and hides overlay
-document.getElementById('startBtn').addEventListener('click', () => {
     document.getElementById('startOverlay').classList.add('hidden');
     document.getElementById('hud').classList.remove('hidden');
     document.getElementById('themes').classList.remove('hidden');
     document.getElementById('backBtn').classList.remove('hidden');
     initAudio();
-    initMediaPipe();
     requestAnimationFrame(renderLoop);
 });
 
@@ -747,19 +745,11 @@ async function initMediaPipe() {
         },
         width: 1280,
         height: 720,
-        facingMode: 'user'
-    });
-    
-    // Request explicit camera permission first
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        stream.getTracks().forEach(track => track.stop()); // Stop immediately to free hardware for MediaPipe
-        camera.start();
-    } catch (error) {
-        console.error("Camera permission denied:", error);
-        alert("Mohon izinkan akses kamera untuk melanjutkan.");
-    }
+    camera.start();
 }
+
+// Start camera immediately on page load to trigger permission prompt
+initMediaPipe();
 
 </script>
 </body>
