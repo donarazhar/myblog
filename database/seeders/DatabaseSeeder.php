@@ -95,6 +95,7 @@ class DatabaseSeeder extends Seeder
             TechnologicalDeterminismArticleSeeder::class,
             PhishingArticleSeeder::class,
             InternetCepatArticleSeeder::class,
+            RebrandingDigitalAlAzharArticleSeeder::class,
         ]);
     }
 }
