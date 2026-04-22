@@ -43,6 +43,7 @@ Route::get('/narutohands', [HomeController::class, 'narutohands'])->name('naruto
 // Belajar Pages
 Route::get('/animath', [HomeController::class, 'animath'])->name('animath');
 Route::get('/wordcatcher', [HomeController::class, 'wordcatcher'])->name('wordcatcher');
+Route::get('/speakenglish', [HomeController::class, 'speakenglish'])->name('speakenglish');
 
 // Articles
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');

@@ -87,6 +87,11 @@ class HomeController extends Controller
         return view('pages.wordcatcher');
     }
 
+    public function speakenglish()
+    {
+        return view('pages.speakenglish');
+    }
+
     public function about()
     {
         $settings = Setting::getAllSettings();

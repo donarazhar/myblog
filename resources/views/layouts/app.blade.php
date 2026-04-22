@@ -176,7 +176,7 @@
 
                     <!-- Belajar Dropdown -->
                     <div class="relative" id="belajar-dropdown">
-                        <button type="button" class="flex items-center gap-1 text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('animath') ? 'text-black' : '' }}" id="belajar-btn">
+                        <button type="button" class="flex items-center gap-1 text-gray-600 hover:text-black font-medium transition-colors duration-200 {{ request()->routeIs('animath') || request()->routeIs('wordcatcher') || request()->routeIs('speakenglish') ? 'text-black' : '' }}" id="belajar-btn">
                             Belajar
                             <svg class="w-4 h-4 transition-transform duration-200" id="belajar-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -189,6 +189,10 @@
                                 <a href="{{ route('wordcatcher') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
                                     <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-xs">🔤</span>
                                     WordCatcher (English)
+                                </a>
+                                <a href="{{ route('speakenglish') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-black transition-colors">
+                                    <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-cyan-500 to-teal-600 flex items-center justify-center text-white text-xs">🎤</span>
+                                    Speak English
                                 </a>
                                 <span class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 cursor-not-allowed" title="Segera Hadir">
                                     <span class="w-6 h-6 rounded-lg bg-gray-200 flex items-center justify-center text-gray-400 text-xs">🔬</span>
@@ -273,6 +277,9 @@
                         </a>
                         <a href="{{ route('wordcatcher') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
                             <span>🔤</span> WordCatcher (English)
+                        </a>
+                        <a href="{{ route('speakenglish') }}" class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-100 hover:text-black transition-colors">
+                            <span>🎤</span> Speak English
                         </a>
                         <span class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-300 cursor-not-allowed">
                             <span>🔬</span> Sains <span class="ml-auto text-xs bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded-full">Soon</span>
