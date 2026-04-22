@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/sketch-templates.js') }}?v={{ time() }}"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -361,6 +362,88 @@
         }
         #drawIndicator { animation: fadeInUI 0.5s ease 1.8s forwards; }
         #colorPicker { animation: fadeInUI 0.5s ease 2s forwards; }
+
+        /* ── Sketch Gallery ── */
+        #sketchGallery {
+            position: fixed; inset: 0;
+            background: rgba(5, 3, 1, 0.96);
+            backdrop-filter: blur(20px);
+            z-index: 180;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: flex-start;
+            padding: 40px 20px;
+            overflow-y: auto;
+            transition: opacity 0.4s, visibility 0.4s;
+        }
+        #sketchGallery.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .gallery-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 900; letter-spacing: 3px;
+            background: linear-gradient(135deg, #F5D061, #E8A317, #FFF8DC);
+            background-size: 300% 300%;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: goldShift 4s ease infinite;
+            margin-bottom: 8px; text-align: center;
+        }
+        .gallery-subtitle { color: rgba(255,255,255,0.4); font-size: 0.85rem; margin-bottom: 28px; text-align: center; }
+        .gallery-tabs {
+            display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; justify-content: center;
+        }
+        .gallery-tab {
+            padding: 8px 20px; border-radius: 25px;
+            font-family: 'Orbitron', sans-serif; font-size: 0.65rem;
+            font-weight: 700; letter-spacing: 1px;
+            border: 1px solid rgba(245,208,97,0.2);
+            background: rgba(20,15,5,0.5); color: #F5D061;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .gallery-tab:hover, .gallery-tab.active {
+            background: rgba(245,208,97,0.2);
+            border-color: rgba(245,208,97,0.6);
+            box-shadow: 0 0 15px rgba(245,208,97,0.2);
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 16px; max-width: 700px; width: 100%;
+        }
+        .sketch-card {
+            background: rgba(20,15,5,0.6);
+            border: 1px solid rgba(245,208,97,0.15);
+            border-radius: 16px; padding: 20px 12px;
+            text-align: center; cursor: pointer;
+            transition: all 0.3s; display: flex;
+            flex-direction: column; align-items: center; gap: 8px;
+        }
+        .sketch-card:hover {
+            background: rgba(245,208,97,0.1);
+            border-color: rgba(245,208,97,0.5);
+            box-shadow: 0 0 25px rgba(245,208,97,0.15);
+            transform: translateY(-4px);
+        }
+        .sketch-card .card-emoji { font-size: 2.5rem; }
+        .sketch-card .card-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.65rem; color: #fce8b5;
+            letter-spacing: 1px;
+        }
+        .sketch-card.free-draw {
+            border-style: dashed;
+            border-color: rgba(245,208,97,0.3);
+        }
+
+        /* Template indicator */
+        #templateIndicator {
+            position: fixed; top: 60px; left: 50%; transform: translateX(-50%);
+            z-index: 100; font-family: 'Orbitron', sans-serif;
+            font-size: 0.65rem; letter-spacing: 1px;
+            padding: 6px 18px; border-radius: 20px;
+            background: rgba(20,15,5,0.5); backdrop-filter: blur(10px);
+            border: 1px solid rgba(245,208,97,0.2);
+            color: rgba(245,208,97,0.7);
+            display: none; transition: all 0.3s;
+        }
     </style>
 </head>
 <body>
@@ -369,9 +452,25 @@
     <div id="startOverlay">
         <div class="start-icon">✍️</div>
         <div class="start-title">PENA TANGAN</div>
-        <p class="start-subtitle">Gambar di udara menggunakan ujung jari Anda. Tahan <strong>Shift</strong> untuk menggambar, tekan <strong>Spasi</strong> untuk menghapus kanvas.</p>
+        <p class="start-subtitle">Gambar di udara menggunakan ujung jari Anda. Pilih sketsa panduan atau gambar bebas!</p>
         <button class="start-btn" id="startBtn">Mulai Menggambar</button>
     </div>
+
+    <!-- Sketch Gallery -->
+    <div id="sketchGallery" class="hidden">
+        <div class="gallery-title">PILIH SKETSA</div>
+        <p class="gallery-subtitle">Pilih gambar panduan untuk ditiru, atau gambar bebas</p>
+        <div class="gallery-tabs">
+            <button class="gallery-tab active" data-cat="all">Semua</button>
+            <button class="gallery-tab" data-cat="animals">🐱 Binatang</button>
+            <button class="gallery-tab" data-cat="nature">🌄 Alam</button>
+            <button class="gallery-tab" data-cat="shapes">⭐ Bentuk</button>
+        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+
+    <!-- Template Indicator -->
+    <div id="templateIndicator"></div>
 
     <!-- Loading -->
     <div id="loading-ui">
@@ -415,6 +514,7 @@
             <p>
                 Tahan <span class="shortcut">Shift</span> untuk menggambar<br>
                 Tekan <span class="shortcut">Spasi</span> untuk hapus kanvas<br>
+                Tekan <span class="shortcut">T</span> untuk pilih template<br>
                 Arahkan jari telunjuk ke mana saja
             </p>
         </div>
@@ -422,8 +522,10 @@
 
     <!-- Toolbar -->
     <div id="toolbar">
+        <button class="tool-btn" id="templateBtn">📋 Template</button>
         <button class="tool-btn" id="clearBtn">🗑️ Hapus</button>
         <button class="tool-btn" id="undoBtn">↩️ Undo</button>
+        <button class="tool-btn" id="hideTemplateBtn" style="display:none;">👁️ Sembunyikan</button>
     </div>
 
     <script>
@@ -446,6 +548,71 @@
         // Current pen color
         let penColor = '#F5D061';
         let penShadow = '#F5D061';
+
+        // Template state
+        let activeTemplate = null;
+        let templateVisible = true;
+        const galleryEl = document.getElementById('sketchGallery');
+        const galleryGrid = document.getElementById('galleryGrid');
+        const templateIndicator = document.getElementById('templateIndicator');
+        const hideTemplateBtn = document.getElementById('hideTemplateBtn');
+
+        // Build gallery cards
+        function buildGallery(filterCat) {
+            galleryGrid.innerHTML = '';
+            // Free draw card
+            var freeCard = document.createElement('div');
+            freeCard.className = 'sketch-card free-draw';
+            freeCard.innerHTML = '<div class="card-emoji">🎨</div><div class="card-name">Gambar Bebas</div>';
+            freeCard.addEventListener('click', function() {
+                activeTemplate = null;
+                templateVisible = true;
+                templateIndicator.style.display = 'none';
+                hideTemplateBtn.style.display = 'none';
+                galleryEl.classList.add('hidden');
+            });
+            galleryGrid.appendChild(freeCard);
+            // Template cards
+            window.sketchTemplates.forEach(function(tpl) {
+                if (filterCat && filterCat !== 'all' && tpl.cat !== filterCat) return;
+                var card = document.createElement('div');
+                card.className = 'sketch-card';
+                card.innerHTML = '<div class="card-emoji">' + tpl.emoji + '</div><div class="card-name">' + tpl.name + '</div>';
+                card.addEventListener('click', function() {
+                    activeTemplate = tpl;
+                    templateVisible = true;
+                    templateIndicator.textContent = '📋 ' + tpl.emoji + ' ' + tpl.name;
+                    templateIndicator.style.display = 'block';
+                    hideTemplateBtn.style.display = 'block';
+                    hideTemplateBtn.textContent = '👁️ Sembunyikan';
+                    galleryEl.classList.add('hidden');
+                });
+                galleryGrid.appendChild(card);
+            });
+        }
+
+        // Gallery tabs
+        document.querySelectorAll('.gallery-tab').forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.gallery-tab').forEach(function(t) { t.classList.remove('active'); });
+                tab.classList.add('active');
+                buildGallery(tab.getAttribute('data-cat'));
+            });
+        });
+
+        // Template toolbar button
+        document.getElementById('templateBtn').addEventListener('click', function() {
+            buildGallery('all');
+            document.querySelectorAll('.gallery-tab').forEach(function(t) { t.classList.remove('active'); });
+            document.querySelector('.gallery-tab[data-cat="all"]').classList.add('active');
+            galleryEl.classList.remove('hidden');
+        });
+
+        // Hide/Show template button
+        hideTemplateBtn.addEventListener('click', function() {
+            templateVisible = !templateVisible;
+            hideTemplateBtn.textContent = templateVisible ? '👁️ Sembunyikan' : '👁️ Tampilkan';
+        });
 
         // ── Color Picker ──
         document.querySelectorAll('.color-dot').forEach(dot => {
@@ -477,6 +644,16 @@
                 e.preventDefault();
                 arr = [];
             }
+            if (e.key === 't' || e.key === 'T') {
+                if (!galleryEl.classList.contains('hidden')) {
+                    galleryEl.classList.add('hidden');
+                } else {
+                    buildGallery('all');
+                    document.querySelectorAll('.gallery-tab').forEach(function(t) { t.classList.remove('active'); });
+                    document.querySelector('.gallery-tab[data-cat="all"]').classList.add('active');
+                    galleryEl.classList.remove('hidden');
+                }
+            }
         };
 
         window.onkeyup = function(e) {
@@ -501,6 +678,29 @@
             ctx.drawImage(res.image, 0, 0, c.width, c.height);
             ctx.fillStyle = 'rgba(10, 6, 2, 0.85)';
             ctx.fillRect(0, 0, c.width, c.height);
+
+            // Draw template sketch if active
+            if (activeTemplate && templateVisible) {
+                ctx.save();
+                ctx.setLineDash([8, 6]);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
+                ctx.lineWidth = 2;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                var sx2 = c.width / 100;
+                var sy2 = c.height / 100;
+                activeTemplate.paths.forEach(function(path) {
+                    if (path.length < 2) return;
+                    ctx.beginPath();
+                    ctx.moveTo(path[0][0] * sx2, path[0][1] * sy2);
+                    for (var pi = 1; pi < path.length; pi++) {
+                        ctx.lineTo(path[pi][0] * sx2, path[pi][1] * sy2);
+                    }
+                    ctx.stroke();
+                });
+                ctx.setLineDash([]);
+                ctx.restore();
+            }
 
             // Draw all strokes
             for (let i = 0; i < arr.length; i++) {
@@ -619,6 +819,9 @@
         // ── Start Button ──
         document.getElementById('startBtn').addEventListener('click', () => {
             startOverlay.classList.add('hidden');
+            // Show sketch gallery first
+            buildGallery('all');
+            galleryEl.classList.remove('hidden');
             initApp();
         });
     </script>

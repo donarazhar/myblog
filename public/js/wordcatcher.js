@@ -119,10 +119,11 @@ const spawnBubble = () => {
 
     // Calculate level params
     // Max balloons ditambah lagi agar layar terlihat ramai ("banyak yang turun")
+    // Speed dipercepat & timer diperpanjang agar gameplay lebih seimbang
     const levelConfig = {
-        1: { speed: 1.0, max: 20 },
-        2: { speed: 1.8, max: 25 },
-        3: { speed: 2.5, max: 30 }
+        1: { speed: 1.5, max: 20 },
+        2: { speed: 2.5, max: 25 },
+        3: { speed: 3.5, max: 30 }
     };
     const conf = levelConfig[gameState.level];
 
@@ -202,10 +203,10 @@ const setupWord = () => {
         gameState.timer = 0;
     } else if (gameState.level === 2) {
         document.getElementById('timer-container').style.display = 'block';
-        gameState.timer = 20;
+        gameState.timer = 35;
     } else {
         document.getElementById('timer-container').style.display = 'block';
-        gameState.timer = 15;
+        gameState.timer = 30;
     }
 };
 
