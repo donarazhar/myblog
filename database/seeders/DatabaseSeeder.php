@@ -96,6 +96,7 @@ class DatabaseSeeder extends Seeder
             PhishingArticleSeeder::class,
             InternetCepatArticleSeeder::class,
             RebrandingDigitalAlAzharArticleSeeder::class,
+            BiometricSsoFaasArticleSeeder::class,
         ]);
     }
 }
