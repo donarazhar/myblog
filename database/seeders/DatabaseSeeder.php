@@ -98,6 +98,7 @@ class DatabaseSeeder extends Seeder
             RebrandingDigitalAlAzharArticleSeeder::class,
             BiometricSsoFaasArticleSeeder::class,
             NocJaringanOperasionalArticleSeeder::class,
+            KedaulatanDigitalArticleSeeder::class,
         ]);
     }
 }
