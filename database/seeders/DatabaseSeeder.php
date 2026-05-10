@@ -99,6 +99,10 @@ class DatabaseSeeder extends Seeder
             BiometricSsoFaasArticleSeeder::class,
             NocJaringanOperasionalArticleSeeder::class,
             KedaulatanDigitalArticleSeeder::class,
+            OsnkProktorArticleSeeder::class,
+            AsesmenUjianSiswaArticleSeeder::class,
+            VhdTkaSemiDaringArticleSeeder::class,
+            InstalasiVhdVirtualboxArticleSeeder::class,
         ]);
     }
 }
