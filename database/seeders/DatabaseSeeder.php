@@ -103,6 +103,7 @@ class DatabaseSeeder extends Seeder
             AsesmenUjianSiswaArticleSeeder::class,
             VhdTkaSemiDaringArticleSeeder::class,
             InstalasiVhdVirtualboxArticleSeeder::class,
+            PlugAndPlayStressTestArticleSeeder::class,
         ]);
     }
 }
