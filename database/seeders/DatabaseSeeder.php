@@ -104,6 +104,7 @@ class DatabaseSeeder extends Seeder
             VhdTkaSemiDaringArticleSeeder::class,
             InstalasiVhdVirtualboxArticleSeeder::class,
             PlugAndPlayStressTestArticleSeeder::class,
+            JenisApiTulangPunggungArticleSeeder::class,
         ]);
     }
 }
